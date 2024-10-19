@@ -4,15 +4,68 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, Di
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { chatSession } from "@/utils/GeminiAiModal";
+import { LoaderCircle } from "lucide-react";
+import { db } from "@/utils/db";
+import { v4 as uuidv4 } from "uuid";
+import { useUser } from "@clerk/nextjs";
+import moment from "moment/moment";
+import { MockInterview } from "@/utils/schema";
 
 function AddNewInterview() {
   const [openDialog, setOpenDialog] = useState(false);
   const [jobPosition, setJobPosition] = useState();
   const [jobDesc, setJobDesc] = useState();
   const [jobExperience, setJobExperience] = useState();
-  const onSubmit = (e) => {
+  const [totalQuestions, setTotalQuestions] = useState();
+  const [language, setLanguage] = useState();
+  const [loading, setLoading] = useState(false);
+  const [jsonMockResp, setJsonMockResp] = useState([]);
+  const { user } = useUser();
+  const onSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
-    console.log(jobPosition, jobDesc, jobExperience);
+    console.log(jobPosition, jobDesc, jobExperience, totalQuestions, language);
+    const inputPromt =
+      "Job Position : " +
+      jobPosition +
+      ", Job Description: " +
+      jobDesc +
+      ", Years of Experience: " +
+      jobExperience +
+      ", total question: " +
+      totalQuestions +
+      ",  interview language: " +
+      language +
+      ". depends on this information, please give me interview question with answered according to selected total question and interview language in JSON format. give question and answered as field in JSON";
+
+    const result = await chatSession.sendMessage(inputPromt);
+    const MockJsonResp = result.response.text().replace("```json", "").replace("```", "");
+    console.log(MockJsonResp);
+    setJsonMockResp(MockJsonResp);
+
+    if (MockJsonResp) {
+      const resp = await db
+        .insert(MockInterview)
+        .values({
+          mockId: uuidv4(),
+          jsonMockResp: MockJsonResp,
+          jobPosition: jobPosition,
+          jobDesc: jobDesc,
+          jobExperience: jobExperience,
+          createdby: user?.primaryEmailAddress?.emailAddress,
+          createdAt: moment().format("YYYY-MM-DD"),
+        })
+        .returning({ mockId: MockInterview.mockId });
+
+      console.log("Inserted ID:", resp);
+      if (resp) {
+        setOpenDialog(false);
+      }
+    } else {
+      console.log("Something went wrong");
+    }
+    setLoading(false);
   };
 
   return (
@@ -33,22 +86,39 @@ function AddNewInterview() {
                   <h2>Add details about your job position, job descriptions, skills and experience</h2>
                   <div className="mt-5 my-3">
                     <label>Job Position</label>
-                    <Input className="text-black focus:outline-none focus:ring-0 focus:border-primary" placeholder="Ex. Software Engineer" required onChange={(e) => setJobPosition(e.target.value)} />
+                    <Input className="text-black focus:outline-none focus:ring-0" placeholder="Ex. Software Engineer" required onChange={(e) => setJobPosition(e.target.value)} />
                   </div>
                   <div className="mt-5 my-3">
                     <label>Job Description</label>
-                    <Textarea placeholder="Ex. React, Node, Typescript" required onChange={(e) => setJobDesc(e.target.value)} />
+                    <Textarea className="text-black focus:outline-none focus:ring-0" placeholder="Ex. React, Node, Typescript" required onChange={(e) => setJobDesc(e.target.value)} />
                   </div>
                   <div className="mt-5 my-3">
                     <label>Years of Experience</label>
-                    <Input placeholder="5" type="number" required onChange={(e) => setJobExperience(e.target.value)} />
+                    <Input className="text-black focus:outline-none focus:ring-0" placeholder="5" type="number" required onChange={(e) => setJobExperience(e.target.value)} />
+                  </div>
+                  <div className="mt-5 my-3">
+                    <label>Total Questions</label>
+                    <Input className="text-black focus:outline-none focus:ring-0" placeholder="5" type="number" max="5" required onChange={(e) => setTotalQuestions(e.target.value)} />
+                  </div>
+                  <div className="mt-5 my-3">
+                    <label>Interview Language</label>
+                    <Input className="text-black focus:outline-none focus:ring-0 focus:border-primary" placeholder="Ex. Indonesia" required onChange={(e) => setLanguage(e.target.value)} />
                   </div>
                 </div>
                 <div className="flex justify-end gap-5">
                   <Button type="button" variant="ghost" onClick={() => setOpenDialog(false)}>
                     Cancel
                   </Button>
-                  <Button type="submit">Start Interview</Button>
+                  <Button type="submit" disabled={loading}>
+                    {loading ? (
+                      <>
+                        {" "}
+                        <LoaderCircle className="w-4 h-4 animate-spin" /> "Ai Generating"
+                      </>
+                    ) : (
+                      "Start Interview"
+                    )}
+                  </Button>
                 </div>
               </form>
             </DialogDescription>

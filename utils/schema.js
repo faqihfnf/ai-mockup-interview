@@ -1,4 +1,4 @@
-import { text, varchar } from "drizzle-orm/mysql-core";
+// import { text, varchar } from "drizzle-orm/mysql-core";
 import { pgTable, serial, timestamp, varchar, text } from "drizzle-orm/pg-core";
 
 export const MockInterview = pgTable("mockInterview", {
@@ -8,6 +8,6 @@ export const MockInterview = pgTable("mockInterview", {
   jobDesc: varchar("jobDesc").notNull(),
   jobExperience: varchar("jobExperience").notNull(),
   createdby: varchar("createdby").notNull(),
-  createdAt: timestamp("createdAt").notNull().defaultNow(),
+  createdAt: varchar("createdAt"),
   mockId: varchar("mockId").notNull(),
 });
