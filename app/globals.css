@@ -75,4 +75,10 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+  input:focus,
+  textarea:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: var(--primary) !important;
+  }
 }
