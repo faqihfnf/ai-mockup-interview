@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useUser } from "@clerk/nextjs";
 import moment from "moment/moment";
 import { MockInterview } from "@/utils/schema";
+import { useRouter } from "next/navigation";
 
 function AddNewInterview() {
   const [openDialog, setOpenDialog] = useState(false);
@@ -21,6 +22,7 @@ function AddNewInterview() {
   const [language, setLanguage] = useState();
   const [loading, setLoading] = useState(false);
   const [jsonMockResp, setJsonMockResp] = useState([]);
+  const router = useRouter();
   const { user } = useUser();
   const onSubmit = async (e) => {
     setLoading(true);
@@ -61,6 +63,7 @@ function AddNewInterview() {
       console.log("Inserted ID:", resp);
       if (resp) {
         setOpenDialog(false);
+        router.push("/dashboard/interview/" + resp[0].mockId);
       }
     } else {
       console.log("Something went wrong");
