@@ -33,7 +33,7 @@ function Interview({ params }) {
             <>
               <div className="flex flex-col items-center">
                 <div className="h-96 w-full flex items-center justify-center flex-col bg-secondary rounded-lg p-2 mt-7 mb-5">
-                  <Webcam onUserMedia={() => setWebCamEnabled(true)} onUserMediaError={() => setWebCamEnabled(false)} style={{ width: "100%", height: "100%" }} />
+                  <Webcam mirrored={true} onUserMedia={() => setWebCamEnabled(true)} onUserMediaError={() => setWebCamEnabled(false)} style={{ width: "100%", height: "100%" }} />
                 </div>
                 <Button variant="secondary" className="text-xl hover:text-primary" onClick={() => setWebCamEnabled(false)}>
                   Disable WebCam and Microphone
