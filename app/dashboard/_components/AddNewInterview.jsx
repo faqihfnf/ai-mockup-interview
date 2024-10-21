@@ -12,6 +12,7 @@ import { useUser } from "@clerk/nextjs";
 import moment from "moment/moment";
 import { MockInterview } from "@/utils/schema";
 import { useRouter } from "next/navigation";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 function AddNewInterview() {
   const [openDialog, setOpenDialog] = useState(false);
@@ -55,6 +56,7 @@ function AddNewInterview() {
           jobPosition: jobPosition,
           jobDesc: jobDesc,
           jobExperience: jobExperience,
+          language: language,
           createdby: user?.primaryEmailAddress?.emailAddress,
           createdAt: moment().format("YYYY-MM-DD"),
         })
@@ -105,7 +107,18 @@ function AddNewInterview() {
                   </div>
                   <div className="mt-5 my-3">
                     <label>Interview Language</label>
-                    <Input className="text-black focus:outline-none focus:ring-0 focus:border-primary" placeholder="Ex. Indonesia" required onChange={(e) => setLanguage(e.target.value)} />
+                    <Select onValueChange={(value) => setLanguage(value)} required>
+                      <SelectTrigger className="">
+                        <SelectValue placeholder="Select a language" />
+                      </SelectTrigger>
+                      <SelectContent className="text-black focus:outline-none focus:ring-0">
+                        <SelectGroup>
+                          {/* <SelectLabel>Language</SelectLabel> */}
+                          <SelectItem value="indonesia">Indonesia</SelectItem>
+                          <SelectItem value="english">English</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
                 <div className="flex justify-end gap-5">
