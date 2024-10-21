@@ -30,7 +30,16 @@ function Interview({ params }) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         <div className="">
           {webCamEnabled ? (
-            <Webcam onUserMedia={() => setWebCamEnabled(true)} onUserMediaError={() => setWebCamEnabled(false)} style={{ width: 700, height: 440, padding: "0", marginTop: "30px" }} />
+            <>
+              <div className="flex flex-col items-center">
+                <div className="h-96 w-full flex items-center justify-center flex-col bg-secondary rounded-lg p-2 mt-7 mb-5">
+                  <Webcam onUserMedia={() => setWebCamEnabled(true)} onUserMediaError={() => setWebCamEnabled(false)} style={{ width: "100%", height: "100%" }} />
+                </div>
+                <Button variant="secondary" className="text-xl hover:text-primary" onClick={() => setWebCamEnabled(false)}>
+                  Disable WebCam and Microphone
+                </Button>
+              </div>
+            </>
           ) : (
             <div className="flex flex-col items-center">
               <WebcamIcon className="h-96 w-full my-7 mb-5 p-12 bg-secondary rounded-lg border" />
@@ -52,9 +61,8 @@ function Interview({ params }) {
               <strong>Information</strong>{" "}
             </h2>
             <h2 className="mt-4 text-yellow-500">
-              {" "}
               Enable video webcam and microphone to start your AI Generated Mock Interview. It has questions which you can answer and at the last you will get the report of your interview on the basis of your answers.
-              <br />
+              <br /> <br />
               <strong>Note: We never record your interview. Web cam access you can disable at any time of you want</strong>
             </h2>
           </div>
