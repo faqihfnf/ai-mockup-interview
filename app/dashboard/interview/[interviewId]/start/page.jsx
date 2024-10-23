@@ -5,6 +5,7 @@ import { eq } from "drizzle-orm";
 import React, { useEffect, useState } from "react";
 import QuestionSection from "./_components/QuestionSection";
 import AnswerSection from "./_components/AnswerSection";
+import { Button } from "@/components/ui/button";
 
 function StartInterview({ params }) {
   const [interviewData, setInterviewData] = useState();
@@ -29,10 +30,26 @@ function StartInterview({ params }) {
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* Questions */}
-        <QuestionSection mockInterviewQuestions={mockInterviewQuestions} activeQuestionIndex={activeQuestionIndex} />
+        <div>
+          <QuestionSection mockInterviewQuestions={mockInterviewQuestions} activeQuestionIndex={activeQuestionIndex} />
+        </div>
 
         {/* Video or Audio Recording */}
-        <AnswerSection mockInterviewQuestions={mockInterviewQuestions} activeQuestionIndex={activeQuestionIndex} params={params} interviewData={interviewData} />
+        <div>
+          <div>
+            <AnswerSection mockInterviewQuestions={mockInterviewQuestions} activeQuestionIndex={activeQuestionIndex} params={params} interviewData={interviewData} />
+          </div>
+
+          <div className=" flex justify-center gap-5 my-2">
+            <Button disabled={activeQuestionIndex === 0} onClick={() => setActiveQuestionIndex(activeQuestionIndex - 1)}>
+              Prev Question
+            </Button>
+            <Button disabled={activeQuestionIndex !== mockInterviewQuestions?.length - 1}>End Interview</Button>
+            <Button disabled={activeQuestionIndex === mockInterviewQuestions?.length - 1} onClick={() => setActiveQuestionIndex(activeQuestionIndex + 1)}>
+              Next Question
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );
