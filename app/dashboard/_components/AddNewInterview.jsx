@@ -40,7 +40,7 @@ function AddNewInterview() {
       totalQuestions +
       ",  interview language: " +
       language +
-      ". depends on this information, please give me interview question with answered according to selected total question and interview language in JSON format. give question and answered as field in JSON";
+      ". depends on this information, please give me interview question with answered according to selected total question and interview language in JSON format.Ensure the difficulty of the questions is appropriate based on the job position, job description, and years of experience. give question and answered as field in JSON";
 
     const result = await chatSession.sendMessage(inputPromt);
     const MockJsonResp = result.response.text().replace("```json", "").replace("```", "");
