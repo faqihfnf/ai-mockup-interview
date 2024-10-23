@@ -4,7 +4,7 @@ import { db } from "@/utils/db";
 import { chatSession } from "@/utils/GeminiAiModal";
 import { MockInterview, UserAnswer } from "@/utils/schema";
 import { eq } from "drizzle-orm";
-import { Mic, SquareArrowOutUpRight, StopCircle } from "lucide-react";
+import { Mic, StopCircle } from "lucide-react";
 import moment from "moment";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -16,7 +16,7 @@ function AnswerSection({ mockInterviewQuestions, activeQuestionIndex, params, in
   const [userAnswer, setUserAnswer] = useState("");
   const [interviewDataUser, setInterviewDataUser] = useState();
   const [loading, setLoading] = useState(false);
-  const { error, interimResult, isRecording, results, startSpeechToText, stopSpeechToText } = useSpeechToText({
+  const { error, interimResult, isRecording, results, startSpeechToText, stopSpeechToText, setResults } = useSpeechToText({
     continuous: true,
     useLegacyResults: false,
   });
@@ -66,19 +66,10 @@ function AnswerSection({ mockInterviewQuestions, activeQuestionIndex, params, in
       interviewDataUser?.language +
       "language and give a rating from 1 to 10 based on how well the User Answer matches the Correct Answer. If the User Answer is not fully accurate, offer encouragement for improvement in a supportive way." +
       "in just 3 to 5 lines to improve it in JSON format with rating field and feedback field";
-    // ",Depending on the question and user answer to provide interview questions" +
-    // " please provide us with rating for the answer and feedback using the" +
-    // interviewDataUser?.language +
-    // "language on the areas that need improvement if any " +
-
-    console.log(mockInterviewQuestions[activeQuestionIndex]?.question);
-    console.log(mockInterviewQuestions[activeQuestionIndex]?.answer);
-    console.log(interviewDataUser?.language);
 
     const result = await chatSession.sendMessage(feedbackPromt);
 
     const mockJsonResp = result.response.text().replace("```json", "").replace("```", "");
-    console.log(mockJsonResp);
     const JsonFeedbackResp = JSON.parse(mockJsonResp);
 
     const response = await db.insert(UserAnswer).values({
@@ -99,8 +90,10 @@ function AnswerSection({ mockInterviewQuestions, activeQuestionIndex, params, in
           label: "Close",
         },
       });
+      setUserAnswer("");
+      setResults([]);
     }
-    setUserAnswer("");
+    setResults([]);
     setLoading(false);
   };
   return (
@@ -121,10 +114,6 @@ function AnswerSection({ mockInterviewQuestions, activeQuestionIndex, params, in
             </h2>
           )}
         </Button>
-        {/* <Button className="text-lg mt-2 w-ful" onClick={() => console.log(userAnswer)}>
-          <SquareArrowOutUpRight />
-          Show Answer
-        </Button> */}
       </div>
     </div>
   );

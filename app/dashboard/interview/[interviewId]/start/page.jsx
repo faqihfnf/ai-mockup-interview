@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import QuestionSection from "./_components/QuestionSection";
 import AnswerSection from "./_components/AnswerSection";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 function StartInterview({ params }) {
   const [interviewData, setInterviewData] = useState();
@@ -21,7 +22,6 @@ function StartInterview({ params }) {
   const GetInterviewDetails = async () => {
     const result = await db.select().from(MockInterview).where(eq(MockInterview.mockId, params.interviewId));
     const jsonMockResp = JSON.parse(result[0].jsonMockResp);
-    console.log(jsonMockResp);
     setMockInterviewQuestions(jsonMockResp);
     setInterviewData(result[0]);
   };
@@ -44,7 +44,9 @@ function StartInterview({ params }) {
             <Button disabled={activeQuestionIndex === 0} onClick={() => setActiveQuestionIndex(activeQuestionIndex - 1)}>
               Prev Question
             </Button>
-            <Button disabled={activeQuestionIndex !== mockInterviewQuestions?.length - 1}>End Interview</Button>
+            <Link href={`/dashboard/interview/${params.interviewId}/feedback`}>
+              <Button disabled={activeQuestionIndex !== mockInterviewQuestions?.length - 1}>End Interview</Button>
+            </Link>
             <Button disabled={activeQuestionIndex === mockInterviewQuestions?.length - 1} onClick={() => setActiveQuestionIndex(activeQuestionIndex + 1)}>
               Next Question
             </Button>

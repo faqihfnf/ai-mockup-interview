@@ -28,7 +28,6 @@ function AddNewInterview() {
   const onSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-    console.log(jobPosition, jobDesc, jobExperience, totalQuestions, language);
     const inputPromt =
       "Job Position : " +
       jobPosition +
@@ -44,7 +43,6 @@ function AddNewInterview() {
 
     const result = await chatSession.sendMessage(inputPromt);
     const MockJsonResp = result.response.text().replace("```json", "").replace("```", "");
-    console.log(MockJsonResp);
     setJsonMockResp(MockJsonResp);
 
     if (MockJsonResp) {
@@ -62,13 +60,11 @@ function AddNewInterview() {
         })
         .returning({ mockId: MockInterview.mockId });
 
-      console.log("Inserted ID:", resp);
       if (resp) {
         setOpenDialog(false);
         router.push("/dashboard/interview/" + resp[0].mockId);
       }
     } else {
-      console.log("Something went wrong");
     }
     setLoading(false);
   };
