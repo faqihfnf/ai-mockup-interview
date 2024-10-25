@@ -1,6 +1,6 @@
 "use client";
 import { db } from "@/utils/db";
-import { MockInterview } from "@/utils/schema";
+import { MockInterview, OverallFeedback } from "@/utils/schema";
 import { eq } from "drizzle-orm";
 import React, { useEffect, useState } from "react";
 import QuestionSection from "./_components/QuestionSection";
@@ -8,6 +8,8 @@ import AnswerSection from "./_components/AnswerSection";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { chatSession } from "@/utils/GeminiAiModal";
+import moment from "moment";
 
 function StartInterview({ params }) {
   const router = useRouter();
@@ -28,12 +30,52 @@ function StartInterview({ params }) {
     setInterviewData(result[0]);
   };
 
+  const OverallFeedbackUser = async () => {
+    const overallFeedbackPrompt =
+      "Based on user responses to the interview questions, provide a summary of your overall feedback in " +
+      interviewData?.language +
+      " Provide friendly, motivational feedback in just 3 to 7 lines to improve it in JSON format with overallFeedback field.";
+
+    // Mendapatkan respon dari chatSession
+    const res = await chatSession.sendMessage(overallFeedbackPrompt);
+
+    // Parsing JSON hasil respon
+    const overallJsonResp = res.response
+      .text()
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .trim();
+
+    let JsonOverallFeedbackResp;
+    try {
+      JsonOverallFeedbackResp = JSON.parse(overallJsonResp);
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      return; // Keluar dari fungsi jika terjadi error parsing
+    }
+
+    // Menyimpan feedback ke database
+    if (JsonOverallFeedbackResp) {
+      await db.insert(OverallFeedback).values({
+        mockIdRef: interviewData?.mockId,
+        overallFeedback: JsonOverallFeedbackResp?.feedback, // Pastikan field JSON sesuai
+        userEmail: interviewData?.createdby,
+        createdAt: moment().format("YYYY-MM-DD"),
+      });
+    }
+  };
+
   // Fungsi untuk memajukan indeks pertanyaan
   const handleNextQuestion = () => {
-    if (activeQuestionIndex === mockInterviewQuestions.length - 1) {
-      // Navigasi ke halaman feedback jika ini adalah pertanyaan terakhir
-      router.push(`/dashboard/interview/${interviewData?.mockId}/feedback`);
+    // Mengecek apakah sudah pada pertanyaan terakhir
+    if (activeQuestionIndex === mockInterviewQuestions?.length - 1) {
+      // Memanggil fungsi untuk menghasilkan feedback keseluruhan
+      OverallFeedbackUser().then(() => {
+        // Pindahkan ke halaman feedback setelah proses selesai
+        router.push(`/dashboard/interview/${interviewData?.mockId}/feedback`);
+      });
     } else {
+      // Jika bukan pertanyaan terakhir, lanjutkan ke pertanyaan berikutnya
       setActiveQuestionIndex(activeQuestionIndex + 1);
     }
   };
@@ -52,7 +94,7 @@ function StartInterview({ params }) {
             <AnswerSection mockInterviewQuestions={mockInterviewQuestions} activeQuestionIndex={activeQuestionIndex} onNextQuestion={handleNextQuestion} params={params} interviewData={interviewData} />
           </div>
 
-          <div className=" flex justify-center gap-5 my-2">
+          {/* <div className=" flex justify-center gap-5 my-2">
             <Button disabled={activeQuestionIndex === 0} onClick={() => setActiveQuestionIndex(activeQuestionIndex - 1)}>
               Prev Question
             </Button>
@@ -61,13 +103,13 @@ function StartInterview({ params }) {
                 <Button>End Interview</Button>
               </Link>
             )}
-            {/* <Link href={`/dashboard/interview/${params.interviewId}/feedback`}>
+            <Link href={`/dashboard/interview/${params.interviewId}/feedback`}>
               <Button disabled={activeQuestionIndex !== mockInterviewQuestions?.length - 1}>End Interview</Button>
-            </Link> */}
+            </Link>
             <Button disabled={activeQuestionIndex === mockInterviewQuestions?.length - 1} onClick={() => setActiveQuestionIndex(activeQuestionIndex + 1)}>
               Next Question
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

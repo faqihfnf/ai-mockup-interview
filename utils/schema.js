@@ -24,3 +24,11 @@ export const UserAnswer = pgTable("userAnswer", {
   userEmail: varchar("userEmail"),
   createdAt: varchar("createdAt"),
 });
+
+export const OverallFeedback = pgTable("overallFeedback", {
+  id: serial("id").primaryKey(),
+  mockIdRef: varchar("mockId").notNull(),
+  overallFeedback: text("overallFeedback"),
+  userEmail: varchar("userEmail"),
+  createdAt: varchar("createdAt"),
+});

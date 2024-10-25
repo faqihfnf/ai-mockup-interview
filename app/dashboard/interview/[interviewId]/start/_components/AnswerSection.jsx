@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { db } from "@/utils/db";
 import { chatSession } from "@/utils/GeminiAiModal";
-import { MockInterview, UserAnswer } from "@/utils/schema";
+import { MockInterview, OverallFeedback, UserAnswer } from "@/utils/schema";
 import { eq } from "drizzle-orm";
 import { Mic, StopCircle } from "lucide-react";
 import moment from "moment";
@@ -66,7 +66,7 @@ function AnswerSection({ mockInterviewQuestions, activeQuestionIndex, onNextQues
       userAnswer +
       "Compare the User Answer with the Question and Correct Answer. Provide friendly, motivational feedback using" +
       interviewDataUser?.language +
-      "language and give a rating from 1 to 10 based on how well the User Answer matches the Correct Answer. If the User Answer is not fully accurate, offer encouragement for improvement in a supportive way." +
+      "language and give a rating from 1 to 5 based on how well the User Answer matches the Correct Answer. And it's okay to give a decimal number for the rating. If the User Answer is not fully accurate, offer encouragement for improvement in a supportive way." +
       "in just 3 to 5 lines to improve it in JSON format with rating field and feedback field";
 
     const result = await chatSession.sendMessage(feedbackPromt);
@@ -84,7 +84,7 @@ function AnswerSection({ mockInterviewQuestions, activeQuestionIndex, onNextQues
       console.error("Error parsing JSON:", error);
       // handle error di sini jika diperlukan, misalnya dengan menampilkan pesan error
     }
-    // const JsonFeedbackResp = JSON.parse(mockJsonResp);
+    const JsonFeedbackResp = JSON.parse(mockJsonResp);
 
     const response = await db.insert(UserAnswer).values({
       mockIdRef: interviewData?.mockId,
@@ -109,9 +109,10 @@ function AnswerSection({ mockInterviewQuestions, activeQuestionIndex, onNextQues
     }
     setLoading(false);
   };
+
   return (
     <div>
-      <div className="flex items-center h-[550px] justify-center flex-col bg-black rounded-lg  mt-5">
+      <div className="flex items-center h-[400px] justify-center flex-col bg-black rounded-lg  mt-5">
         <Image src="/images/webcam.png" width={250} height={250} alt="webcam" className="absolute" />
         <Webcam mirrored={true} style={{ height: "100%", width: "90%", zIndex: 10 }} />
       </div>
