@@ -7,8 +7,10 @@ import QuestionSection from "./_components/QuestionSection";
 import AnswerSection from "./_components/AnswerSection";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 function StartInterview({ params }) {
+  const router = useRouter();
   const [interviewData, setInterviewData] = useState();
   const [mockInterviewQuestions, setMockInterviewQuestions] = useState();
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
@@ -26,6 +28,16 @@ function StartInterview({ params }) {
     setInterviewData(result[0]);
   };
 
+  // Fungsi untuk memajukan indeks pertanyaan
+  const handleNextQuestion = () => {
+    if (activeQuestionIndex === mockInterviewQuestions.length - 1) {
+      // Navigasi ke halaman feedback jika ini adalah pertanyaan terakhir
+      router.push(`/dashboard/interview/${interviewData?.mockId}/feedback`);
+    } else {
+      setActiveQuestionIndex(activeQuestionIndex + 1);
+    }
+  };
+
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -37,16 +49,21 @@ function StartInterview({ params }) {
         {/* Video or Audio Recording */}
         <div>
           <div>
-            <AnswerSection mockInterviewQuestions={mockInterviewQuestions} activeQuestionIndex={activeQuestionIndex} params={params} interviewData={interviewData} />
+            <AnswerSection mockInterviewQuestions={mockInterviewQuestions} activeQuestionIndex={activeQuestionIndex} onNextQuestion={handleNextQuestion} params={params} interviewData={interviewData} />
           </div>
 
           <div className=" flex justify-center gap-5 my-2">
             <Button disabled={activeQuestionIndex === 0} onClick={() => setActiveQuestionIndex(activeQuestionIndex - 1)}>
               Prev Question
             </Button>
-            <Link href={`/dashboard/interview/${params.interviewId}/feedback`}>
+            {activeQuestionIndex == mockInterviewQuestions?.length - 1 && (
+              <Link href={"/dashboard/interview/" + interviewData?.mockId + "/feedback"}>
+                <Button>End Interview</Button>
+              </Link>
+            )}
+            {/* <Link href={`/dashboard/interview/${params.interviewId}/feedback`}>
               <Button disabled={activeQuestionIndex !== mockInterviewQuestions?.length - 1}>End Interview</Button>
-            </Link>
+            </Link> */}
             <Button disabled={activeQuestionIndex === mockInterviewQuestions?.length - 1} onClick={() => setActiveQuestionIndex(activeQuestionIndex + 1)}>
               Next Question
             </Button>
