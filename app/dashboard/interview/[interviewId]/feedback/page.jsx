@@ -3,7 +3,11 @@ import { db } from "@/utils/db";
 import { UserAnswer } from "@/utils/schema";
 import { eq } from "drizzle-orm";
 import React, { useEffect, useState } from "react";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import { ChevronsUpDown } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -17,16 +21,25 @@ function Feedback({ params }) {
   }, []);
 
   const GetFeedback = async () => {
-    const result = await db.select().from(UserAnswer).where(eq(UserAnswer.mockIdRef, params.interviewId)).orderBy(UserAnswer.id);
+    const result = await db
+      .select()
+      .from(UserAnswer)
+      .where(eq(UserAnswer.mockIdRef, params.interviewId))
+      .orderBy(UserAnswer.id);
 
     setFeedbackList(result);
   };
   return (
     <div className="p-10">
       <h2 className="text-3xl font-bold text-green-500">Congratulations!</h2>
-      <h2 className="text-2xl font-semibold">Here is your interview feedback</h2>
+      <h2 className="text-2xl font-semibold">
+        Here is your interview feedback
+      </h2>
       <h2 className="text-primary py-4">Your Overall rating</h2>
-      <h2 className="">Find below interview question with correct answer, Your answer and feedback for improvement</h2>
+      <h2 className="">
+        Find below interview question with correct answer, Your answer and
+        feedback for improvement
+      </h2>
       {feedbackList &&
         feedbackList.map((item, index) => (
           <Collapsible key={index} className="my-5">
@@ -36,7 +49,9 @@ function Feedback({ params }) {
             </CollapsibleTrigger>
             <CollapsibleContent>
               <div className="flex flex-col gap-2">
-                <h2 className="font-bold text-indigo-500 p-2 border rounded-lg">Rating: {item.rating}</h2>
+                <h2 className="font-bold text-indigo-500 p-2 border rounded-lg">
+                  Rating: {item.rating}
+                </h2>
                 <h2 className="p-2 border rounded-lg bg-blue-50 text-blue-900">
                   <strong>Your Answer:</strong> <br />
                   {item.userAnswer}
@@ -54,7 +69,7 @@ function Feedback({ params }) {
           </Collapsible>
         ))}
       <Button className="mt-5" onClick={() => router.push("/dashboard")}>
-        Go to Dashboard
+        Back to Dashboard
       </Button>
     </div>
   );

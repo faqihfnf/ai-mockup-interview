@@ -12,11 +12,24 @@ import useSpeechToText from "react-hook-speech-to-text";
 import Webcam from "react-webcam";
 import { toast } from "sonner";
 
-function AnswerSection({ mockInterviewQuestions, activeQuestionIndex, params, interviewData }) {
+function AnswerSection({
+  mockInterviewQuestions,
+  activeQuestionIndex,
+  params,
+  interviewData,
+}) {
   const [userAnswer, setUserAnswer] = useState("");
   const [interviewDataUser, setInterviewDataUser] = useState();
   const [loading, setLoading] = useState(false);
-  const { error, interimResult, isRecording, results, startSpeechToText, stopSpeechToText, setResults } = useSpeechToText({
+  const {
+    error,
+    interimResult,
+    isRecording,
+    results,
+    startSpeechToText,
+    stopSpeechToText,
+    setResults,
+  } = useSpeechToText({
     continuous: true,
     useLegacyResults: false,
   });
@@ -41,7 +54,10 @@ function AnswerSection({ mockInterviewQuestions, activeQuestionIndex, params, in
    * # Use to  get interview details by mockId/interviewid
    */
   const GetInterviewDetails = async () => {
-    const result = await db.select().from(MockInterview).where(eq(MockInterview.mockId, params.interviewId));
+    const result = await db
+      .select()
+      .from(MockInterview)
+      .where(eq(MockInterview.mockId, params.interviewId));
     setInterviewDataUser(result[0]);
   };
 
@@ -69,7 +85,10 @@ function AnswerSection({ mockInterviewQuestions, activeQuestionIndex, params, in
 
     const result = await chatSession.sendMessage(feedbackPromt);
 
-    const mockJsonResp = result.response.text().replace("```json", "").replace("```", "");
+    const mockJsonResp = result.response
+      .text()
+      .replace("```json", "")
+      .replace("```", "");
     const JsonFeedbackResp = JSON.parse(mockJsonResp);
 
     const response = await db.insert(UserAnswer).values({
@@ -99,14 +118,27 @@ function AnswerSection({ mockInterviewQuestions, activeQuestionIndex, params, in
   return (
     <div>
       <div className="flex items-center h-[550px] justify-center flex-col bg-black rounded-lg  mt-5">
-        <Image src="/images/webcam.png" width={250} height={250} alt="webcam" className="absolute" />
-        <Webcam mirrored={true} style={{ height: "100%", width: "90%", zIndex: 10 }} />
+        <Image
+          src="/images/webcam.png"
+          width={250}
+          height={250}
+          alt="webcam"
+          className="absolute"
+        />
+        <Webcam
+          mirrored={true}
+          style={{ height: "100%", width: "90%", zIndex: 10 }}
+        />
       </div>
       <div className="">
-        <Button disabled={loading} className="bg-slate-300 text-xl mt-2 w-full hover:bg-slate-400" onClick={StartStopRecording}>
+        <Button
+          disabled={loading}
+          className="bg-slate-300 text-xl mt-2 w-full hover:bg-slate-400"
+          onClick={StartStopRecording}>
           {isRecording ? (
             <h2 className="flex text-red-600  gap-2 items-center justify-center animate-pulse">
-              <StopCircle size={30} className=" items-center animate-pulse" /> Stop Recording...
+              <StopCircle size={30} className=" items-center animate-pulse" />{" "}
+              Stop Recording...
             </h2>
           ) : (
             <h2 className="flex gap-2 items-center justify-center text-lg text-primary ">
