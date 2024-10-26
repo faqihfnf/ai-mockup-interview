@@ -1,11 +1,13 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import Navbar from "./_components/Navbar";
+import Hero from "./_components/Hero";
+import PlusPoint from "./_components/PlusPoint";
 
 export default function Home() {
   return (
     <div>
-      <h2>Hello World</h2>
-      <Button>Button</Button>
+      <Navbar />
+      <Hero />
+      <PlusPoint />
     </div>
   );
 }
