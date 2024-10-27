@@ -84,13 +84,13 @@ function StartInterview({ params }) {
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* Questions */}
-        <div>
+        <div className="mt-20">
           <QuestionSection mockInterviewQuestions={mockInterviewQuestions} activeQuestionIndex={activeQuestionIndex} />
         </div>
 
         {/* Video or Audio Recording */}
         <div>
-          <div>
+          <div className="mt-20">
             <AnswerSection mockInterviewQuestions={mockInterviewQuestions} activeQuestionIndex={activeQuestionIndex} onNextQuestion={handleNextQuestion} params={params} interviewData={interviewData} />
           </div>
 

@@ -4,7 +4,7 @@ import { OverallFeedback, UserAnswer } from "@/utils/schema";
 import { eq } from "drizzle-orm";
 import React, { useEffect, useState } from "react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ChevronsUpDown } from "lucide-react";
+import { ChevronsUpDown, PlusCircleIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
@@ -42,7 +42,7 @@ function Feedback({ params }) {
 
   return (
     <div className="p-5">
-      <h2 className="text-5xl font-bold text-green-600 text-center mb-3">Congratulations!</h2>
+      <h2 className="text-5xl font-bold text-green-600 text-center mt-20">Congratulations!</h2>
       <h2 className="text-2xl font-semibold text-center">Here is your interview feedback from AI</h2>
       <h2 className=" text-indigo-700 py-4 text-3xl font-semibold flex items-center gap-2">
         Overall Rating :
@@ -62,10 +62,12 @@ function Feedback({ params }) {
       {feedbackList &&
         feedbackList.map((item, index) => (
           <Collapsible key={index} className="my-5">
-            <CollapsibleTrigger className=" flex justify-between p-2 bg-secondary rounded-lg my-2 text-left gap-10 w-full text-lg">
-              {item.question}
-              <ChevronsUpDown className="h-5- w-5" />
-            </CollapsibleTrigger>
+            <div className="flex justify-between p-2 bg-secondary rounded-lg my-2 w-full text-lg">
+              <CollapsibleTrigger className="w-full text-left ">{item.question}</CollapsibleTrigger>
+              <CollapsibleTrigger>
+                <ChevronsUpDown size={20} />
+              </CollapsibleTrigger>
+            </div>
             <CollapsibleContent>
               <div className="flex flex-col gap-2">
                 <h2 className="font-bold text-indigo-500 p-2 border rounded-lg flex items-center gap-2">

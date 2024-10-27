@@ -25,8 +25,8 @@ function Interview({ params }) {
   };
 
   return (
-    <div className="my-5 flex justify-center flex-col items-center">
-      <h2 className="text-4xl font-bold">Let's start your interview</h2>
+    <div className=" flex justify-center flex-col items-center">
+      <h2 className="text-4xl font-bold mt-24">Let's start your interview</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         <div className="">
           {webCamEnabled ? (

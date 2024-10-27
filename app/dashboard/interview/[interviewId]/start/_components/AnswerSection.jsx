@@ -111,8 +111,8 @@ function AnswerSection({ mockInterviewQuestions, activeQuestionIndex, onNextQues
   };
 
   return (
-    <div>
-      <div className="flex items-center h-[400px] justify-center flex-col bg-black rounded-lg  mt-5">
+    <div className="mt-5 p-5">
+      <div className="flex items-center h-[400px] justify-center flex-col bg-black rounded-lg">
         <Image src="/images/webcam.png" width={250} height={250} alt="webcam" className="absolute" />
         <Webcam mirrored={true} style={{ height: "100%", width: "90%", zIndex: 10 }} />
       </div>

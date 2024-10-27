@@ -11,8 +11,8 @@ function Header() {
   useEffect(() => {}, []);
 
   return (
-    <div className="flex items-center justify-between shadow-md bg-secondary p-2">
-      <Image src={"/images/logo.png"} alt="logo" width={60} height={60} />
+    <div className="fixed w-full flex items-center justify-between shadow-md bg-secondary p-2 px-8 mt-1">
+      <Image className="cursor-pointer" onClick={() => router.push("/")} src={"/images/logo.png"} alt="logo" width={60} height={60} />
       <ul className="hidden md:flex gap-8 font-semibold text-lg">
         <li onClick={() => router.push("/dashboard")} className={`hover:text-primary transition-transform hover:cursor-pointer hover:font-bold hover:underline ${path == "/dashboard" && "text-primary font-bold"}`}>
           Dashboard

@@ -4,17 +4,14 @@ import React from "react";
 function QuestionSection({ mockInterviewQuestions, activeQuestionIndex }) {
   const textToSpeech = (text) => {
     if ("speechSynthesis" in window) {
-      if (window.speechSynthesis.paused) {
-        window.speechSynthesis.resume();
-      } else if (window.speechSynthesis.speaking) {
-        window.speechSynthesis.cancel();
-      }
+      window.speechSynthesis.cancel(); // Batalkan ucapan sebelumnya sebelum memulai yang baru
       const speech = new SpeechSynthesisUtterance(text);
       window.speechSynthesis.speak(speech);
     } else {
       alert("Sorry, your browser doesn't support text to speech!");
     }
   };
+
   return (
     mockInterviewQuestions && (
       <div className="mt-5 p-5 border rounded-lg">
