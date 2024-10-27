@@ -43,7 +43,7 @@ function Footer() {
             {/* Social links End */}
           </div>
 
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4 lg:col-span-2">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:col-span-2">
             <div className="text-center sm:text-left">
               <p className="text-lg font-medium text-white">Our Services</p>
 
