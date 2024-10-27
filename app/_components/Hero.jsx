@@ -27,6 +27,7 @@ function Hero() {
           </h1>
           <h2 className="text-4xl font-bold text-indigo-700 sm:text-5xl mb-8">
             AI akan memberikan kamu <span className="bg-gradient-to-bl from-sky-600 via-purple-600 to-pink-600 bg-clip-text py-10  font-extrabold text-transparent">{typeEffect}</span>
+            <span className="animate-blink text-purple-700">|</span>
           </h2>
           <p className="mx-auto mt-2 max-w-5xl font-medium text-slate-600 sm:text-lg/relaxed ">
             Platform wawancara interaktif dengan AI yang akan membantu kamu mempersiapkan diri menghadapi wawancara kerja. <br /> Dengan fitur yang lengkap seperti open kamera dan microphone membuat pengalaman interviewmu semakin nyata.
