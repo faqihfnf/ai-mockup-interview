@@ -7,17 +7,19 @@ function Hero() {
       {/* Main background gradients */}
       <div className="">
         {/* Purple gradient */}
-        <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-br from-purple-500/40 via-transparent to-transparent"></div>
+        <div className="absolute top-0 left-0 w-full blur-[110px] h-1/3 bg-gradient-to-br from-violet-500 via-transparent to-pink-400 "></div>
         {/* Blue gradient */}
-        <div className="absolute top-0 right-0 w-full h-1/3 bg-gradient-to-bl from-blue-400/50 via-transparent to-transparent"></div>
+        <div className="absolute top-0 right-0 w-[60%] blur-[110px] h-1/6 bg-gradient-to-bl from-cyan-500 via-sky-300 to-green-500"></div>
       </div>{" "}
-      <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
-        <div className="mx-auto max-w-3xl text-center">
-          <h1 className="bg-gradient-to-l from-pink-400 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-7xl">
-            Understand User Flow.
-            <span className="sm:block"> Increase Conversion. </span>
+      <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center mt-4">
+        <div className="mx-auto  text-center">
+          <h1 className="bg-gradient-to-l from-sky-500 via-purple-600 to-pink-600 bg-clip-text py-10 text-3xl font-extrabold text-transparent sm:text-7xl">
+            Interview Smart, Career Start<span className="sm:block"> Persiapkan Dirimu Bersama AI </span>
           </h1>
-          <p className="mx-auto mt-4 max-w-xl sm:text-xl/relaxed ">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt illo tenetur fuga ducimus numquam ea!</p>
+          <p className="mx-auto mt-2 max-w-5xl font-medium text-slate-600 sm:text-lg/relaxed ">
+            Platform wawancara interaktif dengan AI yang siap membantu kamu mempersiapkan diri menghadapi wawancara kerja. <br /> Dengan fitur yang lengkap seperti open kamera dan microphone membuat pengalaman interviewmu semakin nyata dan
+            menyenangkan. AI akan memberi pertanyaan, umpan balik, dan penilaian untuk mengukur kemampuanmu.
+          </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <a className="block w-full rounded bg-indigo-600 px-12 py-3 text-md font-medium text-white hover:bg-indigo-700 cursor-pointer  sm:w-auto" href="/sign-in">
               Get Started
