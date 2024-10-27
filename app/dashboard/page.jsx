@@ -7,10 +7,12 @@ import InterviewList from "./_components/InterviewList";
 function Dashboard() {
   return (
     <div className="p-10 ">
-      <h1 className="text-4xl text-center justify-center font-bold mt-14">Dashboard</h1>
-      <h3 className="text-slate-500 text-center justify-center text-2xl mt-2">Create and start a new mockup interview with AI</h3>
-      <div className=" flex text-center justify-start my-5 ">
+      <div className="flex items-center justify-between mt-20 mb-12">
         <AddNewInterview />
+        <div className="flex flex-col mr-0 lg:mr-56">
+          <h1 className="text-4xl text-center justify-center font-bold ">Dashboard</h1>
+          <h3 className="text-slate-500 text-center justify-center text-2xl ">Create and start a new mockup interview with AI</h3>
+        </div>
       </div>
 
       {/* Previous Interview List */}
