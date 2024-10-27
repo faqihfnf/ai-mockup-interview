@@ -16,7 +16,7 @@ function Navbar() {
           >
             Give Feedback
           </a>
-          <a className="block rounded-md bg-indigo-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-gradient-to-bl hover:from-emerald-300 hover:via-teal-300 hover:to-cyan-300 hover:text-purple-600" href="/sign-in">
+          <a className="block rounded-md bg-indigo-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-gradient-to-bl hover:from-emerald-300 hover:via-teal-300 hover:to-cyan-300 hover:text-purple-600" href="/dashboard">
             Get Started
           </a>
         </div>

@@ -1,5 +1,4 @@
-import { ArrowRightIcon, SquareArrowOutUpRight } from "lucide-react";
-import Link from "next/link";
+import { SquareArrowOutUpRight } from "lucide-react";
 import React from "react";
 
 function Hero() {
@@ -24,7 +23,7 @@ function Hero() {
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <a
               className="flex gap-4 w-full rounded-md bg-indigo-600 px-8 py-3 text-lg font-semibold text-white hover:bg-gradient-to-bl hover:from-emerald-300 hover:via-teal-300 hover:to-cyan-300 hover:text-purple-600 cursor-pointer sm:w-auto"
-              href="/sign-in"
+              href="/dashboard"
             >
               Get Started
               <SquareArrowOutUpRight />

@@ -55,14 +55,16 @@ function Footer() {
                 </li>
 
                 <li>
-                  <a className="text-white/70 transition hover:text-white/50" href="#">
-                    CV Review
+                  <a className="text-white/70 transition hover:text-white/50 relative" href="#">
+                    <span>CV Review</span>
+                    <span className="text-yellow-400 text-xs font-bold absolute top-[-6px] ml-1">soon</span>
                   </a>
                 </li>
 
                 <li>
-                  <a className="text-white/70 transition hover:text-white/50" href="#">
-                    CV Maker
+                  <a className="text-white/70 transition hover:text-white/50 relative" href="#">
+                    <span>CV Maker</span>
+                    <span className="text-yellow-400 text-xs font-bold absolute top-[-6px] ml-1">soon</span>
                   </a>
                 </li>
               </ul>
@@ -89,7 +91,6 @@ function Footer() {
                 <li>
                   <a className="group flex  gap-1.5 ltr:sm:justify-start rtl:sm:justify-end" href="#">
                     <span className="text-white/70 transition group-hover:text-white/50">Live Chat</span>
-
                     <span className="relative flex size-2">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal-400 opacity-75"></span>
                       <span className="relative inline-flex size-2 rounded-full bg-teal-500"></span>
