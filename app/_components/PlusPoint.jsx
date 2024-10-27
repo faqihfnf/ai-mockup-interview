@@ -1,4 +1,4 @@
-import { Brain } from "lucide-react";
+import { Star, Quote, ShieldQuestion, Webcam, Mic, FileCheck } from "lucide-react";
 import React from "react";
 
 function PlusPoint() {
@@ -12,51 +12,60 @@ function PlusPoint() {
       </div>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
         <div className="mx-auto max-w-lg text-center">
-          <h2 className="text-3xl font-bold sm:text-4xl">Plus Point Features</h2>
-          <p className="mt-4 text-gray-700">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur aliquam doloribus nesciunt eos fugiat. Vitae aperiam fugit consequuntur saepe laborum.</p>
+          <h2 className="text-3xl font-bold sm:text-5xl text-indigo-700">Plus Point Features</h2>
+          <p className="mt-4 text-slate-900">Fitur-fitur unggulan yang akan membuat pengalaman interviewmu semakin nyata dan menyenangkan.</p>
         </div>
         <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <div className="block bg-purple-200/10 rounded-xl border shadow-indigo-500/20 py-12 px-6 shadow-xl transition hover:border-pink-500 hover:shadow-pink-500/20">
-            <div className="flex items-center justify-between mb-5">
-              <Brain className="w-8 h-8 text-pink-500" />
-              <h2 className="mt-2 text-2xl font-bold text-slate-900">Digital Campaigns</h2>
+          <div className="block bg-purple-200/10 rounded-xl border shadow-indigo-500/20 py-12 px-6 shadow-xl transition hover:border-pink-500 hover:shadow-pink-500/20 z-10">
+            <div className="flex items-center justify-evently gap-2 mb-5">
+              <ShieldQuestion className="w-8 h-8 text-pink-500" />
+              <h2 className="mt-2 text-2xl font-bold text-slate-900">AI Generating Question</h2>
             </div>
-            <p className="mt-1 text-sm text-slate-700">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci distinctio alias voluptatum blanditiis laudantium.</p>
+            <p className="mt-1 w-full text-sm text-slate-700">
+              Pertanyaan untuk wawancara akan dihasilkan secara otomatis oleh AI sesuai dengan keahlian dan pengalaman kerja yang di input user. Pertanyaan yang relefan akan membantu user untuk lebih baik dalam menjawabnya.
+            </p>
           </div>
-          <div className="block bg-purple-200/10 rounded-xl border shadow-indigo-500/20 py-12 px-6 shadow-xl transition hover:border-pink-500 hover:shadow-pink-500/20">
-            <div className="flex items-center justify-between mb-5">
-              <Brain className="w-8 h-8 text-pink-500" />
-              <h2 className="mt-2 text-2xl font-bold text-slate-900">Digital Campaigns</h2>
+          <div className="block bg-purple-200/10 rounded-xl border shadow-indigo-500/20 py-12 px-6 shadow-xl transition hover:border-pink-500 hover:shadow-pink-500/20 z-10">
+            <div className="flex items-center justify-evently gap-2 mb-5">
+              <FileCheck className="w-8 h-8 text-pink-500" />
+              <h2 className="mt-2 text-2xl font-bold text-slate-900">AI Generating Answer</h2>
             </div>
-            <p className="mt-1 text-sm text-slate-700">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci distinctio alias voluptatum blanditiis laudantium.</p>
+            <p className="mt-1 w-full text-sm text-slate-700">Selain membuat pertanyaan, user juga akan mendapatkan jawaban dari AI. Jawaban ini akan membantu user untuk mengetahui kelebihan dan kekurangannya dalam menjawab pertanyaan.</p>
           </div>
-          <div className="block bg-purple-200/10 rounded-xl border shadow-indigo-500/20 py-12 px-6 shadow-xl transition hover:border-pink-500 hover:shadow-pink-500/20">
-            <div className="flex items-center justify-between mb-5">
-              <Brain className="w-8 h-8 text-pink-500" />
-              <h2 className="mt-2 text-2xl font-bold text-slate-900">Digital Campaigns</h2>
+          <div className="block bg-purple-200/10 rounded-xl border shadow-indigo-500/20 py-12 px-6 shadow-xl transition hover:border-pink-500 hover:shadow-pink-500/20 z-10">
+            <div className="flex items-center justify-evently gap-2 mb-5">
+              <Quote className="w-8 h-8 text-pink-500" />
+              <h2 className="mt-2 text-2xl font-bold text-slate-900">AI Generating Feedback</h2>
             </div>
-            <p className="mt-1 text-sm text-slate-700">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci distinctio alias voluptatum blanditiis laudantium.</p>
+            <p className="mt-1 w-full text-sm text-slate-700">
+              User akan mendapatkan feedback dari AI setelah menjawab pertanyaan dengan membandingkan jawaban user dengan jawaban dari AI. Feedback ini akan membantu user untuk mengetahui kelebihan dan kekurangannya dalam menjawab
+              pertanyaan.
+            </p>
           </div>
-          <div className="block bg-purple-200/10 rounded-xl border shadow-indigo-500/20 py-12 px-6 shadow-xl transition hover:border-pink-500 hover:shadow-pink-500/20">
-            <div className="flex items-center justify-between mb-5">
-              <Brain className="w-8 h-8 text-pink-500" />
-              <h2 className="mt-2 text-2xl font-bold text-slate-900">Digital Campaigns</h2>
+          <div className="block bg-purple-200/10 rounded-xl border shadow-indigo-500/20 py-12 px-6 shadow-xl transition hover:border-pink-500 hover:shadow-pink-500/20 z-10">
+            <div className="flex items-center justify-evently gap-2 mb-5">
+              <Star className="w-8 h-8 text-pink-500" />
+              <h2 className="mt-2 text-2xl font-bold text-slate-900">AI Generating Rating</h2>
             </div>
-            <p className="mt-1 text-sm text-slate-700">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci distinctio alias voluptatum blanditiis laudantium.</p>
+            <p className="mt-1 w-full text-sm text-slate-700">
+              User akan mendapatkan rating dari AI berdasarkan kesesuaian antara pertanyaan dan jawaban user. Rating ini dapat membantu user untuk mengetahui seberapa baik user dalam menjawab pertanyaan.
+            </p>
           </div>
-          <div className="block bg-purple-200/10 rounded-xl border shadow-indigo-500/20 py-12 px-6 shadow-xl transition hover:border-pink-500 hover:shadow-pink-500/20">
-            <div className="flex items-center justify-between mb-5">
-              <Brain className="w-8 h-8 text-pink-500" />
-              <h2 className="mt-2 text-2xl font-bold text-slate-900">Digital Campaigns</h2>
+          <div className="block bg-purple-200/10 rounded-xl border shadow-indigo-500/20 py-12 px-6 shadow-xl transition hover:border-pink-500 hover:shadow-pink-500/20 z-10">
+            <div className="flex items-center justify-evently gap-2 mb-5">
+              <Webcam className="w-8 h-8 text-pink-500" />
+              <h2 className="mt-2 text-2xl font-bold text-slate-900">Open Webcam</h2>
             </div>
-            <p className="mt-1 text-sm text-slate-700">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci distinctio alias voluptatum blanditiis laudantium.</p>
+            <p className="mt-1 w-full text-sm text-slate-700">User dapat membuka kamera ketika melakukan wawancara. Hal ini membantu user untuk mendapatkan simulasi dan pengalaman wawancara yang nyata layaknya wawancara langsung.</p>
           </div>
-          <div className="block bg-purple-200/10 rounded-xl border shadow-indigo-500/20 py-12 px-6 shadow-xl transition hover:border-pink-500 hover:shadow-pink-500/20">
-            <div className="flex items-center justify-between mb-5">
-              <Brain className="w-8 h-8 text-pink-500" />
-              <h2 className="mt-2 text-2xl font-bold text-slate-900">Digital Campaigns</h2>
+          <div className="block bg-purple-200/10 rounded-xl border shadow-indigo-500/20 py-12 px-6 shadow-xl transition hover:border-pink-500 hover:shadow-pink-500/20 z-10">
+            <div className="flex items-center justify-evently gap-2 mb-5">
+              <Mic className="w-8 h-8 text-pink-500" />
+              <h2 className="mt-2 text-2xl font-bold text-slate-900">Use Microphone</h2>
             </div>
-            <p className="mt-1 text-sm text-slate-700">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci distinctio alias voluptatum blanditiis laudantium.</p>
+            <p className="mt-1 w-full text-sm text-slate-700">
+              User menjawab pertanyaan dengan menggunakan mikrofon pada device-nya. Kemudian jawaban tersebut dirubah menjadi text untuk diproses oleh AI guna mendapatkan feedback dan rating.
+            </p>
           </div>
         </div>
       </div>

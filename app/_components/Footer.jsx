@@ -27,14 +27,14 @@ function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" rel="noreferrer" target="_blank" className="text-white transition hover:text-indigo-600">
+                <a href="https://github.com/faqihfnf" rel="noreferrer" target="_blank" className="text-white transition hover:text-indigo-600">
                   <span className="sr-only">GitHub</span>
                   <FaGithub className="size-6" />
                 </a>
               </li>
 
               <li>
-                <a href="#" rel="noreferrer" target="_blank" className="text-white transition hover:text-indigo-600">
+                <a href="https://www.linkedin.com/in/faqih-nur-fahmi-b51bb1ab/" rel="noreferrer" target="_blank" className="text-white transition hover:text-indigo-600">
                   <span className="sr-only">LinkedIn</span>
                   <FaLinkedin className="size-6" />
                 </a>
@@ -75,7 +75,7 @@ function Footer() {
 
               <ul className="mt-8 space-y-4 text-sm">
                 <li>
-                  <a className="text-white/70 transition hover:text-white/50" href="#">
+                  <a className="text-white/70 transition hover:text-white/50" href="#faq">
                     {" "}
                     FAQs{" "}
                   </a>
@@ -101,7 +101,7 @@ function Footer() {
             </div>
 
             <div className="text-center sm:text-left">
-              <p className="text-lg font-medium text-white">Contact Us</p>
+              <p className="text-lg font-medium text-white">Contact Me</p>
 
               <ul className="mt-8 space-y-4 text-sm">
                 <li>
