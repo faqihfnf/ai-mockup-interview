@@ -10,7 +10,7 @@ function Hero() {
         <div className="absolute top-0 left-0 w-full blur-[110px] h-1/3 bg-gradient-to-br from-violet-500 via-transparent to-pink-400 "></div>
         {/* Blue gradient */}
         <div className="absolute top-0 right-0 w-[60%] blur-[110px] h-1/6 bg-gradient-to-bl from-cyan-500 via-sky-300 to-green-500"></div>
-      </div>{" "}
+      </div>
       <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center mt-4">
         <div className="mx-auto  text-center">
           <h1 className="bg-gradient-to-l from-sky-500 via-purple-600 to-pink-600 bg-clip-text py-10 text-3xl font-extrabold text-transparent sm:text-7xl">
@@ -25,7 +25,7 @@ function Hero() {
               Get Started
             </a>
             <a className="block w-full rounded border border-purple-600 px-12 py-3 text-md font-medium text-purple-600 hover:bg-purple-100 focus:outline-none focus:ring active:bg-purple-200 sm:w-auto" href="#">
-              Learn More
+              Contact Me
             </a>
           </div>
         </div>
