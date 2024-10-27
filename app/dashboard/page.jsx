@@ -6,10 +6,10 @@ import InterviewList from "./_components/InterviewList";
 
 function Dashboard() {
   return (
-    <div className="p-10">
-      <h1 className="text-2xl font-bold mt-16">Dashboard</h1>
-      <h3 className="text-slate-500">Create and start a new mockup interview with AI</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 my-5 ">
+    <div className="p-10 ">
+      <h1 className="text-4xl text-center justify-center font-bold mt-14">Dashboard</h1>
+      <h3 className="text-slate-500 text-center justify-center text-2xl mt-2">Create and start a new mockup interview with AI</h3>
+      <div className=" flex text-center justify-start my-5 ">
         <AddNewInterview />
       </div>
 

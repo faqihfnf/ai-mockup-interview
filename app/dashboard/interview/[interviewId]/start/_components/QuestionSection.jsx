@@ -21,8 +21,8 @@ function QuestionSection({ mockInterviewQuestions, activeQuestionIndex }) {
               <h2 className={`p-2 border border-primary text-primary rounded-full text-xs md:text-md text-center cursor-pointer font-semibold ${activeQuestionIndex == index && "bg-primary text-white"}`}>Question #{index + 1}</h2>
             ))}
         </div>
-        <h2 className="my-2 text-lg">{mockInterviewQuestions[activeQuestionIndex]?.question}</h2>
-        <h2 className="text-lg flex gap-2 items-center">
+        <h2 className="my-4 text-lg">{mockInterviewQuestions[activeQuestionIndex]?.question}</h2>
+        <h2 className="text-lg flex gap-2 items-center my-4">
           <Volume2 className="cursor-pointer hover:text-primary transition-transform hover:scale-110" size={30} onClick={() => textToSpeech(mockInterviewQuestions[activeQuestionIndex]?.question)} />
           Click icon to speech question
         </h2>

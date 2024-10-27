@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { db } from "@/utils/db";
 import { UserAnswer } from "@/utils/schema";
 import { eq } from "drizzle-orm";
+import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -30,8 +31,11 @@ function InterviewItemCard({ interview }) {
   };
 
   return (
-    <div className="border shadow-sm rounded-lg p-3">
-      <h2 className="font-bold text-primary mb-2">{interview?.jobPosition}</h2>
+    <div className="border rounded-lg p-3 shadow-md hover:shadow-indigo-500 ">
+      <div className="flex justify-between items-center mb-2">
+        <h2 className="font-bold text-primary">{interview?.jobPosition}</h2>
+        <Trash2 className="cursor-pointer w-4 h-4" />
+      </div>
       <h2 className="text-sm text-gray-600 mb-1">{interview?.jobExperience} Years of Experience</h2>
       <h2 className="text-xs text-gray-400">Created Date : {interview.createdAt}</h2>
       <div className="flex justify-between mt-5 gap-5">

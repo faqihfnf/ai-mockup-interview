@@ -11,7 +11,7 @@ function Footer() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
             <div className="flex justify-center sm:justify-start bg-gradient-to-l from-sky-600 via-purple-600 to-pink-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-4xl"> Wawancarai.</div>
-            <p className="mt-6 max-w-md text-center leading-relaxed text-white sm:max-w-xs sm:text-left">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt consequuntur amet culpa cum itaque neque.</p>
+            <p className="mt-6 max-w-md text-center leading-relaxed text-white sm:max-w-xs sm:text-left">Wawancarai is an AI-powered mockup interview tool that helps you create and start a new mockup interview with ease.</p>
             {/* Social links Start */}
             <ul className="mt-8 flex justify-center gap-6 sm:justify-start md:gap-8">
               <li>
@@ -49,20 +49,20 @@ function Footer() {
 
               <ul className="mt-8 space-y-4 text-sm">
                 <li>
-                  <a className="text-white/70 transition hover:text-white/50" href="#">
+                  <a className="text-white/70 transition hover:text-white/50" href="/dashboard">
                     Mock Interview
                   </a>
                 </li>
 
                 <li>
-                  <a className="text-white/70 transition hover:text-white/50 relative" href="#">
+                  <a className="text-white/70 transition hover:text-white/50 relative" href="/cv-review">
                     <span>CV Review</span>
                     <span className="text-yellow-400 text-xs font-bold absolute top-[-6px] ml-1">soon</span>
                   </a>
                 </li>
 
                 <li>
-                  <a className="text-white/70 transition hover:text-white/50 relative" href="#">
+                  <a className="text-white/70 transition hover:text-white/50 relative" href="/cv-maker">
                     <span>CV Maker</span>
                     <span className="text-yellow-400 text-xs font-bold absolute top-[-6px] ml-1">soon</span>
                   </a>

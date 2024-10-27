@@ -25,7 +25,7 @@ function PlusPoint() {
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
         <div className="mx-auto max-w-lg text-center">
           <h2 className="text-3xl font-bold sm:text-5xl text-indigo-700">Plus Point Features</h2>
-          <p className="mt-4 text-slate-900">Fitur-fitur unggulan yang akan membuat pengalaman interviewmu semakin nyata dan menyenangkan.</p>
+          <p className="mt-4 text-slate-950 text-lg">Fitur-fitur unggulan yang akan membuat pengalaman wawancaramu semakin nyata dan menyenangkan.</p>
         </div>
         <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           <div

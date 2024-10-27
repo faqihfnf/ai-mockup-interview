@@ -16,13 +16,7 @@ function InterviewList() {
   }, [user]);
 
   const GetInterviewList = async () => {
-    const result = await db
-      .select()
-      .from(MockInterview)
-      .where(
-        eq(MockInterview.createdby, user?.primaryEmailAddress?.emailAddress)
-      )
-      .orderBy(desc(MockInterview.id));
+    const result = await db.select().from(MockInterview).where(eq(MockInterview.createdby, user?.primaryEmailAddress?.emailAddress)).orderBy(desc(MockInterview.id));
 
     console.log(result);
     setInterviewList(result);
@@ -30,16 +24,12 @@ function InterviewList() {
 
   return (
     <div>
-      <h2 className="font-medium text-xl">Previous Mock Interview</h2>
+      <h2 className="font-medium text-2xl">Previous Mock Interview</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-3">
         {interviewList?.length > 0
-          ? interviewList.map((interview, index) => (
-              <InterviewItemCard interview={interview} key={index} />
-            ))
-          : [1, 2, 3, 4].map((item, index) => (
-              <div className="h-[100px] w-full bg-gray-200 animate-pulse rounded-lg "></div>
-            ))}
+          ? interviewList.map((interview, index) => <InterviewItemCard interview={interview} key={index} />)
+          : [1, 2, 3, 4].map((item, index) => <div className="h-[100px] w-full bg-gray-200 animate-pulse rounded-lg "></div>)}
       </div>
     </div>
   );
