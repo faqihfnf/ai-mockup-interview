@@ -24,7 +24,10 @@ function StartInterview({ params }) {
    * # Use to  get interview details by mockId/interviewid
    */
   const GetInterviewDetails = async () => {
-    const result = await db.select().from(MockInterview).where(eq(MockInterview.mockId, params.interviewId));
+    const result = await db
+      .select()
+      .from(MockInterview)
+      .where(eq(MockInterview.mockId, params.interviewId));
     const jsonMockResp = JSON.parse(result[0].jsonMockResp);
     setMockInterviewQuestions(jsonMockResp);
     setInterviewData(result[0]);
@@ -58,7 +61,7 @@ function StartInterview({ params }) {
     if (JsonOverallFeedbackResp) {
       await db.insert(OverallFeedback).values({
         mockIdRef: interviewData?.mockId,
-        overallFeedback: JsonOverallFeedbackResp?.feedback, // Pastikan field JSON sesuai
+        overallFeedback: JsonOverallFeedbackResp?.overallFeedback, // Pastikan field JSON sesuai
         userEmail: interviewData?.createdby,
         createdAt: moment().format("YYYY-MM-DD"),
       });
@@ -85,13 +88,22 @@ function StartInterview({ params }) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* Questions */}
         <div className="mt-20">
-          <QuestionSection mockInterviewQuestions={mockInterviewQuestions} activeQuestionIndex={activeQuestionIndex} />
+          <QuestionSection
+            mockInterviewQuestions={mockInterviewQuestions}
+            activeQuestionIndex={activeQuestionIndex}
+          />
         </div>
 
         {/* Video or Audio Recording */}
         <div>
           <div className="mt-20">
-            <AnswerSection mockInterviewQuestions={mockInterviewQuestions} activeQuestionIndex={activeQuestionIndex} onNextQuestion={handleNextQuestion} params={params} interviewData={interviewData} />
+            <AnswerSection
+              mockInterviewQuestions={mockInterviewQuestions}
+              activeQuestionIndex={activeQuestionIndex}
+              onNextQuestion={handleNextQuestion}
+              params={params}
+              interviewData={interviewData}
+            />
           </div>
 
           {/* <div className=" flex justify-center gap-5 my-2">

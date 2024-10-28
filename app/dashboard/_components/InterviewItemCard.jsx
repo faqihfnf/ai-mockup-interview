@@ -6,7 +6,17 @@ import { eq } from "drizzle-orm";
 import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
 
 function InterviewItemCard({ interview, onDelete }) {
@@ -28,7 +38,11 @@ function InterviewItemCard({ interview, onDelete }) {
 
   const GetFeedback = async () => {
     try {
-      const result = await db.select().from(UserAnswer).where(eq(UserAnswer.mockIdRef, interview?.mockId)).orderBy(UserAnswer.id);
+      const result = await db
+        .select()
+        .from(UserAnswer)
+        .where(eq(UserAnswer.mockIdRef, interview?.mockId))
+        .orderBy(UserAnswer.id);
 
       setFeedbackList(result);
     } catch (error) {
@@ -42,13 +56,19 @@ function InterviewItemCard({ interview, onDelete }) {
     setIsDeleting(true);
     try {
       // Hapus user answers terkait
-      await db.delete(UserAnswer).where(eq(UserAnswer.mockIdRef, interview?.mockId));
+      await db
+        .delete(UserAnswer)
+        .where(eq(UserAnswer.mockIdRef, interview?.mockId));
 
       // Hapus overall feedback terkait
-      await db.delete(OverallFeedback).where(eq(OverallFeedback.mockIdRef, interview?.mockId));
+      await db
+        .delete(OverallFeedback)
+        .where(eq(OverallFeedback.mockIdRef, interview?.mockId));
 
       // Hapus mock interview
-      await db.delete(MockInterview).where(eq(MockInterview.mockId, interview?.mockId));
+      await db
+        .delete(MockInterview)
+        .where(eq(MockInterview.mockId, interview?.mockId));
 
       // Tampilkan toast success
       toast.success("Interview deleted successfully", {
@@ -78,27 +98,51 @@ function InterviewItemCard({ interview, onDelete }) {
         <h2 className="font-bold text-primary">{interview?.jobPosition}</h2>
         <AlertDialog>
           <AlertDialogTrigger disabled={isDeleting}>
-            <Trash2 className={`cursor-pointer w-4 h-4 hover:text-red-500 ${isDeleting ? "opacity-50" : ""}`} />
+            <Trash2
+              className={`cursor-pointer w-4 h-4 hover:text-red-500 ${
+                isDeleting ? "opacity-50" : ""
+              }`}
+            />
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Apakah anda yakin ingin menghapus interview ini?</AlertDialogTitle>
-              <AlertDialogDescription>Data yang dihapus tidak dapat dikembalikan kembali. Maka pastikan anda benar-benar yakin sebelum menghapusnya.</AlertDialogDescription>
+              <AlertDialogTitle>
+                Apakah anda yakin ingin menghapus interview ini?
+              </AlertDialogTitle>
+              <AlertDialogDescription>
+                Data yang dihapus tidak dapat dikembalikan kembali. Maka
+                pastikan anda benar-benar yakin sebelum menghapusnya.
+              </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={handleDelete} className={`bg-red-500 hover:bg-red-600 ${isDeleting ? "opacity-50 cursor-not-allowed" : ""}`} disabled={isDeleting}>
+              <AlertDialogCancel disabled={isDeleting}>
+                Cancel
+              </AlertDialogCancel>
+              <AlertDialogAction
+                onClick={handleDelete}
+                className={`bg-red-500 hover:bg-red-600 ${
+                  isDeleting ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+                disabled={isDeleting}>
                 {isDeleting ? "Deleting..." : "Delete"}
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
       </div>
-      <h2 className="text-sm text-gray-600 mb-1">{interview?.jobExperience} Years of Experience</h2>
-      <h2 className="text-xs text-gray-400">Created Date : {interview.createdAt}</h2>
+      <h2 className="text-sm text-gray-600 mb-1">
+        {interview?.jobExperience} Years of Experience
+      </h2>
+      <h2 className="text-xs text-gray-400">
+        Created Date : {interview.createdAt}
+      </h2>
       <div className="flex justify-between mt-5 gap-5">
         {feedbackList?.length > 0 ? (
-          <Button size="sm" variant="outline" className="w-full" onClick={onFeedbackPress}>
+          <Button
+            size="sm"
+            variant="outline"
+            className="w-full"
+            onClick={onFeedbackPress}>
             Feedback Interview
           </Button>
         ) : (

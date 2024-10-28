@@ -21,7 +21,13 @@ function InterviewList() {
   const GetInterviewList = async () => {
     try {
       setIsLoading(true);
-      const result = await db.select().from(MockInterview).where(eq(MockInterview.createdby, user?.primaryEmailAddress?.emailAddress)).orderBy(desc(MockInterview.id));
+      const result = await db
+        .select()
+        .from(MockInterview)
+        .where(
+          eq(MockInterview.createdby, user?.primaryEmailAddress?.emailAddress)
+        )
+        .orderBy(desc(MockInterview.id));
 
       setInterviewList(result);
     } catch (error) {
@@ -33,7 +39,9 @@ function InterviewList() {
 
   const handleDelete = (mockId) => {
     // Update local state to remove the deleted interview
-    setInterviewList((prevList) => prevList.filter((interview) => interview.mockId !== mockId));
+    setInterviewList((prevList) =>
+      prevList.filter((interview) => interview.mockId !== mockId)
+    );
 
     // Refresh the list from server
     GetInterviewList();
@@ -46,13 +54,26 @@ function InterviewList() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-3">
         {isLoading ? (
           // Loading skeleton
-          [1, 2, 3, 4].map((item, index) => <div key={index} className="h-[100px] w-full bg-gray-200 animate-pulse rounded-lg" />)
+          [1, 2, 3, 4, 5, 6].map((item, index) => (
+            <div
+              key={index}
+              className="h-[150px] w-full bg-gray-200 animate-pulse rounded-lg"
+            />
+          ))
         ) : interviewList.length > 0 ? (
           // Interview cards
-          interviewList.map((interview) => <InterviewItemCard key={interview.mockId} interview={interview} onDelete={handleDelete} />)
+          interviewList.map((interview) => (
+            <InterviewItemCard
+              key={interview.mockId}
+              interview={interview}
+              onDelete={handleDelete}
+            />
+          ))
         ) : (
           // No interviews message
-          <div className="col-span-full text-center text-gray-500 py-8">No mock interviews found. Create your first one!</div>
+          <div className="col-span-full text-center text-gray-500 py-8">
+            No mock interviews found. Create your first one!
+          </div>
         )}
       </div>
     </div>
