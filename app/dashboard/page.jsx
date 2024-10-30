@@ -7,16 +7,24 @@ import InterviewList from "./_components/InterviewList";
 function Dashboard() {
   return (
     <div className="p-10 ">
-      <div className="flex items-center justify-between mt-20 mb-12">
-        <AddNewInterview />
-        <div className="flex flex-col mr-0 lg:mr-56">
-          <h1 className="text-4xl text-center justify-center font-bold ">Dashboard</h1>
-          <h3 className="text-slate-500 text-center justify-center text-2xl ">Create and start a new mockup interview with AI</h3>
+      <div className="flex items-center justify-center mt-16 mb-4">
+        <div className="flex flex-col">
+          <h1 className="text-4xl text-center justify-center font-bold ">
+            Wawancara
+          </h1>
+          <h3 className="text-slate-500 text-center justify-center text-2xl ">
+            Create and start a new mockup interview with AI
+          </h3>
         </div>
+      </div>
+      <div className="mb-4">
+        <AddNewInterview />
       </div>
 
       {/* Previous Interview List */}
-      <InterviewList />
+      <div>
+        <InterviewList />
+      </div>
     </div>
   );
 }

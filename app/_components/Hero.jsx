@@ -41,13 +41,13 @@ function Hero() {
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <a
-              className="flex gap-4 w-full rounded-md bg-indigo-600 px-8 py-3 text-lg font-semibold text-white hover:bg-gradient-to-bl hover:from-emerald-300 hover:via-teal-300 hover:to-cyan-300 hover:text-purple-600 cursor-pointer sm:w-auto"
+              className="flex gap-4 w-full items-center justify-center rounded-md bg-indigo-600 px-8 py-3 text-lg font-semibold text-white hover:bg-gradient-to-bl hover:from-emerald-300 hover:via-teal-300 hover:to-cyan-300 hover:text-purple-600 cursor-pointer sm:w-auto"
               href="/dashboard">
               Get Started
               <SquareArrowOutUpRight />
             </a>
             <a
-              className="block w-full rounded-md border bg-purple-50 border-purple-600 px-12 py-3 text-lg font-semibold text-purple-600 hover:bg-gradient-to-bl hover:from-purple-100 hover:via-violet-100 hover:to-indigo-100 focus:outline-none focus:ring active:bg-purple-200 sm:w-auto"
+              className="flex justify-center items-center w-full rounded-md border bg-purple-50 border-purple-600 px-12 py-3 text-lg font-semibold text-purple-600 hover:bg-gradient-to-bl hover:from-purple-100 hover:via-violet-100 hover:to-indigo-100 focus:outline-none focus:ring active:bg-purple-200 sm:w-auto"
               href="https://wa.me/628996423135" // Menggunakan wa.me untuk tautan langsung
               target="_blank" // Membuka di tab baru
               rel="noopener noreferrer" // Untuk keamanan

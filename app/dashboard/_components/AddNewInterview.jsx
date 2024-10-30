@@ -1,6 +1,14 @@
 "use client";
 import React, { useState } from "react";
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,7 +20,15 @@ import { useUser } from "@clerk/nextjs";
 import moment from "moment/moment";
 import { MockInterview } from "@/utils/schema";
 import { useRouter } from "next/navigation";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 function AddNewInterview() {
   const [openDialog, setOpenDialog] = useState(false);
@@ -75,17 +91,30 @@ function AddNewInterview() {
 
   return (
     <div>
-      <div
+      <button className="-z-50 relative inline-flex h-12 overflow-hidden rounded-full p-[2px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 ">
+        <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+        <span
+          className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-white hover:bg-violet-50  px-3 py-1 text-sm font-medium text-black backdrop-blur-3xl"
+          onClick={() => setOpenDialog(true)}>
+          <Plus className="w-10 h-10 text-indigo-700 hover:text-indigo-800" />
+          <span className="text-indigo-700 text-lg hover:text-indigo-800">
+            Add Interview
+          </span>
+        </span>
+      </button>
+      {/* <div
         className=" w-12 h-12 flex items-center justify-center border rounded-full text-center bg-secondary hover:scale-105 transition-all hover:cursor-pointer hover:shadow-indigo-400 shadow-lg border-indigo-400 bg-slate-50"
-        onClick={() => setOpenDialog(true)}
-      >
+        onClick={() => setOpenDialog(true)}>
         <Plus className="w-10 h-10 text-indigo-700" />
-      </div>
+        Add
+      </div> */}
       <Dialog open={openDialog}>
         <DialogContent className="p-4">
           <DialogHeader>
             <div className="flex items-center justify-between">
-              <DialogTitle className="text-2xl font-bold">Tell us more about your job interview</DialogTitle>
+              <DialogTitle className="text-2xl font-bold">
+                Tell us more about your job interview
+              </DialogTitle>
               <DialogClose onClick={() => setOpenDialog(false)}>
                 <X />
               </DialogClose>
@@ -93,26 +122,54 @@ function AddNewInterview() {
             <DialogDescription>
               <form onSubmit={onSubmit}>
                 <div>
-                  <h2>Add details about your job position, job descriptions, skills and experience</h2>
+                  <h2>
+                    Add details about your job position, job descriptions,
+                    skills and experience
+                  </h2>
                   <div className="mt-5 my-3">
                     <label>Job Position</label>
-                    <Input className="text-black focus:outline-none focus:ring-0" placeholder="Ex. Software Engineer" required onChange={(e) => setJobPosition(e.target.value)} />
+                    <Input
+                      className="text-black focus:outline-none focus:ring-0"
+                      placeholder="Ex. Software Engineer"
+                      required
+                      onChange={(e) => setJobPosition(e.target.value)}
+                    />
                   </div>
                   <div className="mt-5 my-3">
                     <label>Job Description</label>
-                    <Textarea className="text-black focus:outline-none focus:ring-0" placeholder="Ex. React, Node, Typescript" required onChange={(e) => setJobDesc(e.target.value)} />
+                    <Textarea
+                      className="text-black focus:outline-none focus:ring-0"
+                      placeholder="Ex. React, Node, Typescript"
+                      required
+                      onChange={(e) => setJobDesc(e.target.value)}
+                    />
                   </div>
                   <div className="mt-5 my-3">
                     <label>Years of Experience</label>
-                    <Input className="text-black focus:outline-none focus:ring-0" placeholder="5" type="number" required onChange={(e) => setJobExperience(e.target.value)} />
+                    <Input
+                      className="text-black focus:outline-none focus:ring-0"
+                      placeholder="5"
+                      type="number"
+                      required
+                      onChange={(e) => setJobExperience(e.target.value)}
+                    />
                   </div>
                   <div className="mt-5 my-3">
                     <label>Total Questions</label>
-                    <Input className="text-black focus:outline-none focus:ring-0" placeholder="5" type="number" max="5" required onChange={(e) => setTotalQuestions(e.target.value)} />
+                    <Input
+                      className="text-black focus:outline-none focus:ring-0"
+                      placeholder="5"
+                      type="number"
+                      max="5"
+                      required
+                      onChange={(e) => setTotalQuestions(e.target.value)}
+                    />
                   </div>
                   <div className="mt-5 my-3">
                     <label>Interview Language</label>
-                    <Select onValueChange={(value) => setLanguage(value)} required>
+                    <Select
+                      onValueChange={(value) => setLanguage(value)}
+                      required>
                       <SelectTrigger className="">
                         <SelectValue placeholder="Select a language" />
                       </SelectTrigger>
@@ -127,14 +184,18 @@ function AddNewInterview() {
                   </div>
                 </div>
                 <div className="flex justify-end gap-5">
-                  <Button type="button" variant="ghost" onClick={() => setOpenDialog(false)}>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    onClick={() => setOpenDialog(false)}>
                     Cancel
                   </Button>
                   <Button type="submit" disabled={loading}>
                     {loading ? (
                       <>
                         {" "}
-                        <LoaderCircle className="w-4 h-4 animate-spin" /> "Ai Generating"
+                        <LoaderCircle className="w-4 h-4 animate-spin" /> "Ai
+                        Generating"
                       </>
                     ) : (
                       "Start Interview"

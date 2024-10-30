@@ -141,12 +141,15 @@ function InterviewItemCard({ interview, onDelete }) {
           <Button
             size="sm"
             variant="outline"
-            className="w-full"
+            className="w-full border-primary hover:bg-violet-50 "
             onClick={onFeedbackPress}>
             Feedback Interview
           </Button>
         ) : (
-          <Button size="sm" className="w-full" onClick={onStart}>
+          <Button
+            size="sm"
+            className="w-full hover:bg-indigo-800"
+            onClick={onStart}>
             Start Interview
           </Button>
         )}
