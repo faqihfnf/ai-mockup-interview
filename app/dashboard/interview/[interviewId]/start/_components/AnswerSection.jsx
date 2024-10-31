@@ -13,12 +13,26 @@ import useSpeechToText from "react-hook-speech-to-text";
 import Webcam from "react-webcam";
 import { toast } from "sonner";
 
-function AnswerSection({ mockInterviewQuestions, activeQuestionIndex, onNextQuestion, params, interviewData }) {
+function AnswerSection({
+  mockInterviewQuestions,
+  activeQuestionIndex,
+  onNextQuestion,
+  params,
+  interviewData,
+}) {
   const router = useRouter();
   const [userAnswer, setUserAnswer] = useState("");
   const [interviewDataUser, setInterviewDataUser] = useState();
   const [loading, setLoading] = useState(false);
-  const { error, interimResult, isRecording, results, startSpeechToText, stopSpeechToText, setResults } = useSpeechToText({
+  const {
+    error,
+    interimResult,
+    isRecording,
+    results,
+    startSpeechToText,
+    stopSpeechToText,
+    setResults,
+  } = useSpeechToText({
     continuous: true,
     useLegacyResults: false,
   });
@@ -43,7 +57,10 @@ function AnswerSection({ mockInterviewQuestions, activeQuestionIndex, onNextQues
    * # Use to  get interview details by mockId/interviewid
    */
   const GetInterviewDetails = async () => {
-    const result = await db.select().from(MockInterview).where(eq(MockInterview.mockId, params.interviewId));
+    const result = await db
+      .select()
+      .from(MockInterview)
+      .where(eq(MockInterview.mockId, params.interviewId));
     setInterviewDataUser(result[0]);
   };
 
@@ -106,6 +123,12 @@ function AnswerSection({ mockInterviewQuestions, activeQuestionIndex, onNextQues
       });
       onNextQuestion(); // Jalankan navigasi atau lanjutkan pertanyaan berikutnya
       setUserAnswer("");
+    } else {
+      // Tampilkan notifikasi jika penyimpanan jawaban gagal
+      toast("Failed to save answer", {
+        description: "Please try again.",
+        action: { label: "Close" },
+      });
     }
     setLoading(false);
   };
@@ -113,14 +136,27 @@ function AnswerSection({ mockInterviewQuestions, activeQuestionIndex, onNextQues
   return (
     <div className="mt-5 p-5">
       <div className="flex items-center h-[400px] justify-center flex-col bg-black rounded-lg">
-        <Image src="/images/webcam.png" width={250} height={250} alt="webcam" className="absolute" />
-        <Webcam mirrored={true} style={{ height: "100%", width: "90%", zIndex: 10 }} />
+        <Image
+          src="/images/webcam.png"
+          width={250}
+          height={250}
+          alt="webcam"
+          className="absolute"
+        />
+        <Webcam
+          mirrored={true}
+          style={{ height: "100%", width: "90%", zIndex: 10 }}
+        />
       </div>
       <div className="">
-        <Button disabled={loading} className="bg-slate-300 text-xl mt-2 w-full hover:bg-slate-400" onClick={StartStopRecording}>
+        <Button
+          disabled={loading}
+          className="bg-slate-300 text-xl mt-2 w-full hover:bg-slate-400"
+          onClick={StartStopRecording}>
           {isRecording ? (
             <h2 className="flex text-red-600  gap-2 items-center justify-center animate-pulse">
-              <StopCircle size={30} className=" items-center animate-pulse" /> Stop Recording...
+              <StopCircle size={30} className=" items-center animate-pulse" />{" "}
+              Stop Recording...
             </h2>
           ) : (
             <h2 className="flex gap-2 items-center justify-center text-lg text-primary ">

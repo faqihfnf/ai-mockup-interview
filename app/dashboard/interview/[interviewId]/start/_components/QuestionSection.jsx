@@ -18,12 +18,28 @@ function QuestionSection({ mockInterviewQuestions, activeQuestionIndex }) {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {mockInterviewQuestions &&
             mockInterviewQuestions.map((question, index) => (
-              <h2 className={`p-2 border border-primary text-primary rounded-full text-xs md:text-md text-center cursor-pointer font-semibold ${activeQuestionIndex == index && "bg-primary text-white"}`}>Question #{index + 1}</h2>
+              <h2
+                key={index}
+                className={`p-2 border border-primary text-primary rounded-full text-xs md:text-md text-center cursor-pointer font-semibold ${
+                  activeQuestionIndex == index && "bg-primary text-white"
+                }`}>
+                Question #{index + 1}
+              </h2>
             ))}
         </div>
-        <h2 className="my-4 text-lg">{mockInterviewQuestions[activeQuestionIndex]?.question}</h2>
+        <h2 className="my-4 text-lg">
+          {mockInterviewQuestions[activeQuestionIndex]?.question}
+        </h2>
         <h2 className="text-lg flex gap-2 items-center my-4">
-          <Volume2 className="cursor-pointer hover:text-primary transition-transform hover:scale-110" size={30} onClick={() => textToSpeech(mockInterviewQuestions[activeQuestionIndex]?.question)} />
+          <Volume2
+            className="cursor-pointer hover:text-primary transition-transform hover:scale-110"
+            size={30}
+            onClick={() =>
+              textToSpeech(
+                mockInterviewQuestions[activeQuestionIndex]?.question
+              )
+            }
+          />
           Click icon to speech question
         </h2>
         <div className="border rounded-lg p-5 mt-5 bg-blue-100">
@@ -32,8 +48,11 @@ function QuestionSection({ mockInterviewQuestions, activeQuestionIndex }) {
             <strong>Note : </strong>
           </h3>
           <h2 className="text-sm text-primary my-3">
-            Click on record answer when you want to answer a question. At the end of the interview, we will give you feedback with the correct answer for each question and your answer to compare it and give you a score for your answer. Make
-            sure your answer the question with a clear voice!
+            Click on record answer when you want to answer a question. At the
+            end of the interview, we will give you feedback with the correct
+            answer for each question and your answer to compare it and give you
+            a score for your answer. Make sure your answer the question with a
+            clear voice!
           </h2>
         </div>
       </div>

@@ -86,7 +86,7 @@ function Faq() {
           <AccordionContent className="text-sm md:text-lg text-indigo-800 font-semibold">
             Tidak perlu khawatir! Platform tidak merekam video anda sama sekali.
             Fitur opencam hanya digunakan untuk simulasi agar wawancara menjadi
-            lebih nyata. Anda bisa berlatih manjawab wawancara dengan
+            lebih nyata. Anda bisa berlatih menjawab pertanyaan wawancara dengan
             menggunakan fitur opencam
           </AccordionContent>
         </AccordionItem>

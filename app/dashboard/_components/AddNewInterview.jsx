@@ -55,13 +55,14 @@ function AddNewInterview() {
       totalQuestions +
       ",  interview language: " +
       language +
-      ". depends on this information, please give me interview question with answered according to selected total question and interview language in JSON format.Ensure the difficulty of the questions is appropriate based on the job position, job description, and years of experience. give question and answered as field in JSON";
+      ". depends on this information, please give me interview question with to the point answered according to selected total question and interview language. Ensure the difficulty of the questions is appropriate based on the job position, job description, and years of experience. IMPORTANT!!! Please give question and answered consistently as field in JSON";
 
     const result = await chatSession.sendMessage(inputPromt);
     const MockJsonResp = result.response
       .text()
       .replace(/```json/g, "")
       .replace(/```/g, "")
+      .replace(/[\b\f\n\r\t\v]/g, "")
       .trim();
     setJsonMockResp(MockJsonResp);
 
@@ -91,7 +92,7 @@ function AddNewInterview() {
 
   return (
     <div>
-      <button className="-z-50 relative inline-flex h-12 overflow-hidden rounded-full p-[2px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 ">
+      <button className=" relative inline-flex h-12 overflow-hidden rounded-full p-[2px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 ">
         <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
         <span
           className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-white hover:bg-violet-50  px-3 py-1 text-sm font-medium text-black backdrop-blur-3xl"
