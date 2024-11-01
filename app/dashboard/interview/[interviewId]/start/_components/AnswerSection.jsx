@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 import { db } from "@/utils/db";
 import { chatSession } from "@/utils/GeminiAiModal";
 import { MockInterview, OverallFeedback, UserAnswer } from "@/utils/schema";
@@ -13,12 +14,27 @@ import useSpeechToText from "react-hook-speech-to-text";
 import Webcam from "react-webcam";
 import { toast } from "sonner";
 
-function AnswerSection({ mockInterviewQuestions, activeQuestionIndex, onNextQuestion, params, interviewData }) {
+function AnswerSection({
+  mockInterviewQuestions,
+  activeQuestionIndex,
+  onNextQuestion,
+  params,
+  interviewData,
+}) {
   const router = useRouter();
+  const { toast } = useToast();
   const [userAnswer, setUserAnswer] = useState("");
   const [interviewDataUser, setInterviewDataUser] = useState();
   const [loading, setLoading] = useState(false);
-  const { error, interimResult, isRecording, results, startSpeechToText, stopSpeechToText, setResults } = useSpeechToText({
+  const {
+    error,
+    interimResult,
+    isRecording,
+    results,
+    startSpeechToText,
+    stopSpeechToText,
+    setResults,
+  } = useSpeechToText({
     continuous: true,
     useLegacyResults: false,
   });
@@ -51,12 +67,18 @@ function AnswerSection({ mockInterviewQuestions, activeQuestionIndex, onNextQues
     const wordCount = userAnswer.trim().split(/\s+/).length;
 
     if (wordCount < 10) {
-      toast.error("Answer too short", {
-        description: "Please provide an answer with at least 10 words",
-        action: {
-          label: "Close",
-        },
+      // toast.error("Answer too short", {
+      //   description: "Please provide an answer with at least 10 words",
+      //   action: {
+      //     label: "Close",
+      //   },
+      // });
+      toast({
+        variant: "destructive",
+        title: "Jawaban Terlalu Singkat!",
+        description: "Silahkan berikan jawaban dengan minimal 10 kata",
       });
+
       setUserAnswer("");
       setResults([]);
       return;
@@ -67,12 +89,20 @@ function AnswerSection({ mockInterviewQuestions, activeQuestionIndex, onNextQues
 
   const GetInterviewDetails = async () => {
     try {
-      const result = await db.select().from(MockInterview).where(eq(MockInterview.mockId, params.interviewId));
+      const result = await db
+        .select()
+        .from(MockInterview)
+        .where(eq(MockInterview.mockId, params.interviewId));
       setInterviewDataUser(result[0]);
     } catch (err) {
-      toast.error("Failed to fetch interview details", {
-        description: "Please try again !",
+      toast({
+        variant: "destructive",
+        title: "Gagal Mengambil Data Interview!",
+        description: "Silahkan coba kembali",
       });
+      // toast.error("Failed to fetch interview details", {
+      //   description: "Please try again !",
+      // });
     }
   };
 
@@ -84,9 +114,14 @@ function AnswerSection({ mockInterviewQuestions, activeQuestionIndex, onNextQues
         startSpeechToText();
       }
     } catch (err) {
-      toast.error("Recording error", {
-        description: "Please check your microphone permissions and try again",
+      toast({
+        variant: "destructive",
+        title: "Recording Error!",
+        description: "Silahkan periksa izin mikrofon Anda dan coba lagi",
       });
+      // toast.error("Recording error", {
+      //   description: "Please check your microphone permissions and try again",
+      // });
     }
   };
 
@@ -131,17 +166,28 @@ function AnswerSection({ mockInterviewQuestions, activeQuestionIndex, onNextQues
       });
 
       if (response) {
-        toast.success("Answer saved successfully", {
-          description: "Thank you for your answer!",
+        // toast.success("Answer saved successfully", {
+        //   description: "Thank you for your answer!",
+        // });
+        toast({
+          variant: "success",
+          title: "Jawaban Berhasil Disimpan!",
+          description: "Terima kasih atas jawabanmu!",
         });
+
         onNextQuestion(); // Move to next question
         setUserAnswer(""); // Reset user answer
         setResults([]); // Reset results
       }
     } catch (err) {
-      toast.error("Failed to process answer", {
+      toast({
+        variant: "destructive",
+        title: "Gagal Menyimpan Jawaban!",
         description: err.message || "Please try again",
       });
+      // toast.error("Failed to process answer", {
+      //   description: err.message || "Please try again",
+      // });
     } finally {
       setLoading(false);
     }
@@ -150,14 +196,27 @@ function AnswerSection({ mockInterviewQuestions, activeQuestionIndex, onNextQues
   return (
     <div className="mt-5 p-5">
       <div className="flex items-center h-[400px] justify-center flex-col bg-black rounded-lg">
-        <Image src="/images/webcam.png" width={250} height={250} alt="webcam" className="absolute" />
-        <Webcam mirrored={true} style={{ height: "100%", width: "90%", zIndex: 10 }} />
+        <Image
+          src="/images/webcam.png"
+          width={250}
+          height={250}
+          alt="webcam"
+          className="absolute"
+        />
+        <Webcam
+          mirrored={true}
+          style={{ height: "100%", width: "90%", zIndex: 10 }}
+        />
       </div>
       <div className="">
-        <Button disabled={loading} className="bg-slate-300 text-xl mt-2 w-full hover:bg-slate-400" onClick={StartStopRecording}>
+        <Button
+          disabled={loading}
+          className="bg-slate-300 text-xl mt-2 w-full hover:bg-slate-400"
+          onClick={StartStopRecording}>
           {loading ? (
             <h2 className="flex gap-2 items-center justify-center text-lg text-primary">
-              <LoaderCircle className="animate-spin" size={100} /> Saving Answer...
+              <LoaderCircle className="animate-spin" size={100} /> Saving
+              Answer...
             </h2>
           ) : isRecording ? (
             <h2 className="flex text-red-600 gap-2 items-center justify-center animate-pulse">

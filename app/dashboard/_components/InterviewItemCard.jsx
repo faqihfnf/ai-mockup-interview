@@ -17,9 +17,10 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { toast } from "sonner";
+import { useToast } from "@/hooks/use-toast";
 
 function InterviewItemCard({ interview, onDelete }) {
+  const { toast } = useToast();
   const [feedbackList, setFeedbackList] = useState([]);
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
@@ -71,11 +72,10 @@ function InterviewItemCard({ interview, onDelete }) {
         .where(eq(MockInterview.mockId, interview?.mockId));
 
       // Tampilkan toast success
-      toast.success("Interview deleted successfully", {
+      toast({
+        variant: "destructive",
+        title: "Interview deleted successfully",
         description: `${interview.jobPosition} interview has been deleted.`,
-        action: {
-          label: "Close",
-        },
       });
 
       // Panggil onDelete callback dari parent component
