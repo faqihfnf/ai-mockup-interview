@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { UserButton } from "@clerk/nextjs";
 import { Menu } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -66,9 +67,11 @@ function Header() {
             Soon
           </Badge>
         </div>
-        <li className="hover:text-primary transition-transform hover:cursor-pointer hover:font-bold hover:underline">
+        <Link
+          href="https://tally.so/r/w8pYvx"
+          className="hover:text-primary transition-transform hover:cursor-pointer hover:font-bold hover:underline">
           Give Feedback
-        </li>
+        </Link>
       </ul>
 
       <div className="hidden md:flex">
@@ -124,11 +127,12 @@ function Header() {
                 Soon
               </Badge>
             </div>
-            <li
+            <link
+              href="https://tally.so/r/w8pYvx"
               className="hover:text-primary transition-transform hover:cursor-pointer hover:font-bold hover:underline"
               onClick={toggleMobileMenu}>
               Give Feedback
-            </li>
+            </link>
             <li className="flex gap-2" onClick={toggleMobileMenu}>
               Account
               <UserButton />

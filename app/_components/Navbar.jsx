@@ -16,7 +16,7 @@ function Navbar() {
         <div className="flex gap-4">
           <a
             className="hidden md:flex rounded-md border border-purple-600 bg-purple-100 text-purple-600 px-5 py-2.5 text-sm font-semibold transition hover:bg-gradient-to-bl hover:from-purple-200 hover:via-violet-200  hover:to-indigo-200 hover:text-purple-800"
-            href="/">
+            href="https://tally.so/r/w8pYvx">
             Give Feedback
           </a>
           <a

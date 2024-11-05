@@ -29,6 +29,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
 
 function AddNewInterview() {
   const [openDialog, setOpenDialog] = useState(false);
@@ -41,6 +42,7 @@ function AddNewInterview() {
   const [jsonMockResp, setJsonMockResp] = useState([]);
   const router = useRouter();
   const { user } = useUser();
+  const { toast } = useToast();
   const onSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -55,7 +57,7 @@ function AddNewInterview() {
       totalQuestions +
       ",  interview language: " +
       language +
-      ". depends on this information, please give me interview question with to the point answered according to selected total question and interview language. Ensure the difficulty of the questions is appropriate based on the job position, job description, and years of experience. IMPORTANT!!! Please give question and answered consistently as field in JSON";
+      ". Based on this information, please generate interview questions with concise answers according to the selected total questions and interview language. Ensure question difficulty is appropriate to the job position, job description, and years of experience. The higher the experience level and the seniority of the position, the more complex and in-depth the questions should be. IMPORTANT!!! Please give question and answered consistently as field in JSON.";
 
     const result = await chatSession.sendMessage(inputPromt);
     const MockJsonResp = result.response
@@ -82,17 +84,30 @@ function AddNewInterview() {
         .returning({ mockId: MockInterview.mockId });
 
       if (resp) {
-        setOpenDialog(false);
-        window.location.reload();
+        toast({
+          variant: "success",
+          title: "Generate Mock Interview Berhasil",
+          description: "Silahkan untuk memulai interview anda! ",
+        });
+        // Menunggu sebelum menjalankan setOpenDialog dan reload
+        setTimeout(() => {
+          setOpenDialog(false);
+          window.location.reload();
+        }, 1500);
       }
     } else {
+      toast({
+        variant: "destructive",
+        title: "Generate Mock Interview Gagal",
+        description: "Silahkan coba lagi! ",
+      });
     }
     setLoading(false);
   };
 
   return (
-    <div>
-      <button className=" relative inline-flex h-12 overflow-hidden rounded-full p-[2px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 ">
+    <div className="flex items-center justify-center md:justify-start">
+      <button className="relative inline-flex h-12 overflow-hidden rounded-full p-[2px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 ">
         <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
         <span
           className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-white hover:bg-violet-50  px-3 py-1 text-sm font-medium text-black backdrop-blur-3xl"
@@ -114,7 +129,7 @@ function AddNewInterview() {
           <DialogHeader>
             <div className="flex items-center justify-between">
               <DialogTitle className="text-2xl font-bold">
-                Tell us more about your job interview
+                Latihan Wawancara Bersama dengan AI
               </DialogTitle>
               <DialogClose onClick={() => setOpenDialog(false)}>
                 <X />
@@ -124,42 +139,50 @@ function AddNewInterview() {
               <form onSubmit={onSubmit}>
                 <div>
                   <h2>
-                    Add details about your job position, job descriptions,
-                    skills and experience
+                    Masukan detail informasi tentang pekerjaan, skil dan
+                    pengalaman kamu.
                   </h2>
                   <div className="mt-5 my-3">
-                    <label>Job Position</label>
+                    <label className="text-black font-semibold">
+                      Job Position
+                    </label>
                     <Input
                       className="text-black focus:outline-none focus:ring-0"
-                      placeholder="Ex. Software Engineer"
+                      placeholder="Tuliskan Pekerjaanmu saat ini, atau pekerjaan yang akan kamu lamar."
                       required
                       onChange={(e) => setJobPosition(e.target.value)}
                     />
                   </div>
                   <div className="mt-5 my-3">
-                    <label>Job Description</label>
+                    <label className="text-black font-semibold">
+                      Job Description (Skills)
+                    </label>
                     <Textarea
                       className="text-black focus:outline-none focus:ring-0"
-                      placeholder="Ex. React, Node, Typescript"
+                      placeholder="Tulis tentang jobdesk / skill yang kamu miliki dengan ringkas dan jelas. Contoh : HTML, CSS, Javascript"
                       required
                       onChange={(e) => setJobDesc(e.target.value)}
                     />
                   </div>
                   <div className="mt-5 my-3">
-                    <label>Years of Experience</label>
+                    <label className="text-black font-semibold">
+                      Years of Experience
+                    </label>
                     <Input
                       className="text-black focus:outline-none focus:ring-0"
-                      placeholder="5"
+                      placeholder="Tuliskan pengalaman kerja yang kamu miliki. Contoh : 2 "
                       type="number"
                       required
                       onChange={(e) => setJobExperience(e.target.value)}
                     />
                   </div>
                   <div className="mt-5 my-3">
-                    <label>Total Questions</label>
+                    <label className="text-black font-semibold">
+                      Total Questions
+                    </label>
                     <Input
                       className="text-black focus:outline-none focus:ring-0"
-                      placeholder="5"
+                      placeholder="Tuliskan jumlah pertanyaan yang kamu inginkan. Maksimal 5"
                       type="number"
                       max="5"
                       required
@@ -167,12 +190,14 @@ function AddNewInterview() {
                     />
                   </div>
                   <div className="mt-5 my-3">
-                    <label>Interview Language</label>
+                    <label className="text-black font-semibold">
+                      Interview Language
+                    </label>
                     <Select
                       onValueChange={(value) => setLanguage(value)}
                       required>
                       <SelectTrigger className="">
-                        <SelectValue placeholder="Select a language" />
+                        <SelectValue placeholder="Pilih Bahasa wawancara yang kamu inginkan" />
                       </SelectTrigger>
                       <SelectContent className="text-black focus:outline-none focus:ring-0">
                         <SelectGroup>

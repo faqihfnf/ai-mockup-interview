@@ -13,7 +13,7 @@ function Dashboard() {
             Wawancara
           </h1>
           <h3 className="text-slate-500 text-center justify-center text-2xl ">
-            Create and start a new mockup interview with AI
+            Buat dan segera mulai wawancaramu dengan AI
           </h3>
         </div>
       </div>

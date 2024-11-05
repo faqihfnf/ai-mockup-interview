@@ -72,7 +72,7 @@ function Footer() {
               <ul className="mt-8 space-y-4 text-sm">
                 <li>
                   <a
-                    className="text-white/70 transition hover:text-white/50"
+                    className="text-white/70 transition hover:text-indigo-600"
                     href="/dashboard">
                     Mock Interview
                   </a>
@@ -80,7 +80,7 @@ function Footer() {
 
                 <li>
                   <a
-                    className="text-white/70 transition hover:text-white/50 relative"
+                    className="text-white/70 transition hover:text-indigo-600 relative"
                     href="/cv-review">
                     <span>CV Review</span>
                     <span className="text-yellow-400 text-xs font-bold absolute top-[-6px] ml-1">
@@ -91,7 +91,7 @@ function Footer() {
 
                 <li>
                   <a
-                    className="text-white/70 transition hover:text-white/50 relative"
+                    className="text-white/70 transition hover:text-indigo-600 relative"
                     href="/cv-maker">
                     <span>CV Maker</span>
                     <span className="text-yellow-400 text-xs font-bold absolute top-[-6px] ml-1">
@@ -108,7 +108,7 @@ function Footer() {
               <ul className="mt-8 space-y-4 text-sm">
                 <li>
                   <a
-                    className="text-white/70 transition hover:text-white/50"
+                    className="text-white/70 transition hover:text-indigo-600"
                     href="#faq">
                     {" "}
                     FAQs{" "}
@@ -120,7 +120,7 @@ function Footer() {
                     href="https://wa.me/628996423135" // Menggunakan wa.me untuk tautan langsung
                     target="_blank" // Membuka di tab baru
                     rel="noopener noreferrer" // Untuk keamanan
-                    className="text-white/70 transition hover:text-white/50">
+                    className="text-white/70 transition hover:text-indigo-600">
                     {" "}
                     Support{" "}
                   </a>
@@ -132,7 +132,7 @@ function Footer() {
                     target="_blank" // Membuka di tab baru
                     rel="noopener noreferrer" // Untuk keamanan
                     className="group flex gap-1.5 sm:justify-start justify-center items-center">
-                    <span className="text-white/70 transition group-hover:text-white/50">
+                    <span className="text-white/70 transition group-hover:text-indigo-600">
                       Live Chat
                     </span>
                     <span className="relative flex size-2">
