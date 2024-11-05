@@ -74,8 +74,8 @@ function InterviewItemCard({ interview, onDelete }) {
       // Tampilkan toast success
       toast({
         variant: "destructive",
-        title: "Interview deleted successfully",
-        description: `${interview.jobPosition} interview has been deleted.`,
+        title: "Hapus Interview!",
+        description: `Interview ${interview.jobPosition} telah dihapus!`,
       });
 
       // Panggil onDelete callback dari parent component

@@ -127,12 +127,12 @@ function Header() {
                 Soon
               </Badge>
             </div>
-            <link
+            <a
               href="https://tally.so/r/w8pYvx"
               className="hover:text-primary transition-transform hover:cursor-pointer hover:font-bold hover:underline"
               onClick={toggleMobileMenu}>
               Give Feedback
-            </link>
+            </a>
             <li className="flex gap-2" onClick={toggleMobileMenu}>
               Account
               <UserButton />
