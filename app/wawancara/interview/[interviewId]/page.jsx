@@ -66,7 +66,7 @@ function Interview({ params }) {
               <strong>Note: We never record your interview. Web cam access you can disable at any time of you want</strong>
             </h2>
           </div>
-          <Link className=" flex justify-center" href={"/dashboard/interview/" + params.interviewId + "/start"}>
+          <Link className=" flex justify-center" href={"/wawancara/interview/" + params.interviewId + "/start"}>
             <Button className="mt-3 text-lg w-full"> Start Mock Interview</Button>
           </Link>
         </div>

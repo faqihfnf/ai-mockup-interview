@@ -27,22 +27,17 @@ function Hero() {
             <span className="sm:block"> Persiapkan Dirimu Bersama AI </span>
           </h1>
           <h2 className="text-4xl font-bold text-indigo-700 sm:text-5xl mb-8">
-            AI akan memberikan kamu{" "}
-            <span className="bg-gradient-to-bl from-sky-600 via-purple-600 to-pink-600 bg-clip-text py-10  font-extrabold text-transparent">
-              {typeEffect}
-            </span>
+            AI akan memberikan kamu <span className="bg-gradient-to-bl from-sky-600 via-purple-600 to-pink-600 bg-clip-text py-10  font-extrabold text-transparent">{typeEffect}</span>
             <span className="animate-blink text-purple-700">|</span>
           </h2>
           <p className="mx-auto mt-2 max-w-5xl font-medium text-slate-600 sm:text-lg/relaxed ">
-            Platform wawancara interaktif dengan AI yang akan membantu kamu
-            mempersiapkan diri menghadapi wawancara kerja. <br /> Dengan fitur
-            yang lengkap seperti open kamera dan microphone membuat pengalaman
-            interviewmu semakin nyata.
+            Platform wawancara interaktif dengan AI yang akan membantu kamu mempersiapkan diri menghadapi wawancara kerja. <br /> Dengan fitur yang lengkap seperti open kamera dan microphone membuat pengalaman interviewmu semakin nyata.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <a
               className="flex gap-4 w-full items-center justify-center rounded-md bg-indigo-600 px-8 py-3 text-lg font-semibold text-white hover:bg-gradient-to-bl hover:from-emerald-300 hover:via-teal-300 hover:to-cyan-300 hover:text-purple-600 cursor-pointer sm:w-auto"
-              href="/dashboard">
+              href="/wawancara"
+            >
               Get Started
               <SquareArrowOutUpRight />
             </a>
