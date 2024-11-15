@@ -9,6 +9,9 @@ export const metadata = {
   title: "Wawancarai - AI Mock Interview ",
   description:
     "Latihan interview dengan AI cerdas yang menyediakan soal dan memberikan penilaian serta umpan balik untuk setiap jawaban Anda. Tingkatkan kemampuan interview Anda melalui wawancara interaktif dan real-time feedback.",
+  icons: {
+    icon: "/images/logo.png",
+  },
 };
 
 export default function RootLayout({ children }) {
