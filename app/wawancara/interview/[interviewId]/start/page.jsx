@@ -1,15 +1,11 @@
 "use client";
-import { db } from "@/utils/db";
-import { MockInterview, OverallFeedback } from "@/utils/schema";
-import { eq } from "drizzle-orm";
+import { generateOverallFeedback, getInterview } from "@/app/wawancara/actions";
 import React, { useEffect, useState } from "react";
 import QuestionSection from "./_components/QuestionSection";
 import AnswerSection from "./_components/AnswerSection";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { chatSession } from "@/utils/GeminiAiModal";
-import moment from "moment";
 
 function StartInterview({ params }) {
   const router = useRouter();
@@ -24,44 +20,18 @@ function StartInterview({ params }) {
    * # Use to  get interview details by mockId/interviewid
    */
   const GetInterviewDetails = async () => {
-    const result = await db.select().from(MockInterview).where(eq(MockInterview.mockId, params.interviewId));
-    const jsonMockResp = JSON.parse(result[0].jsonMockResp);
+    const result = await getInterview(params.interviewId);
+    const jsonMockResp = JSON.parse(result.jsonMockResp);
     setMockInterviewQuestions(jsonMockResp);
-    setInterviewData(result[0]);
+    setInterviewData(result);
   };
 
   const OverallFeedbackUser = async () => {
-    const overallFeedbackPrompt =
-      "Based on user responses to the interview questions, provide a summary of your overall feedback in " +
-      interviewData?.language +
-      " Provide friendly, motivational feedback in just 3 to 7 lines to improve it in JSON format with overallFeedback field.";
-
-    // Mendapatkan respon dari chatSession
-    const res = await chatSession.sendMessage(overallFeedbackPrompt);
-
-    // Parsing JSON hasil respon
-    const overallJsonResp = res.response
-      .text()
-      .replace(/```json/g, "")
-      .replace(/```/g, "")
-      .trim();
-
-    let JsonOverallFeedbackResp;
+    // Overall feedback dibuat di server berdasarkan semua jawaban user yang tersimpan
     try {
-      JsonOverallFeedbackResp = JSON.parse(overallJsonResp);
+      await generateOverallFeedback(interviewData?.mockId);
     } catch (error) {
-      console.error("Error parsing JSON:", error);
-      return; // Keluar dari fungsi jika terjadi error parsing
-    }
-
-    // Menyimpan feedback ke database
-    if (JsonOverallFeedbackResp) {
-      await db.insert(OverallFeedback).values({
-        mockIdRef: interviewData?.mockId,
-        overallFeedback: JsonOverallFeedbackResp?.overallFeedback, // Pastikan field JSON sesuai
-        userEmail: interviewData?.createdby,
-        createdAt: moment().format("YYYY-MM-DD"),
-      });
+      console.error("Error generating overall feedback:", error);
     }
   };
 

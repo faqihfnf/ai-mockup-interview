@@ -1,7 +1,5 @@
 "use client";
-import { db } from "@/utils/db";
-import { OverallFeedback, UserAnswer } from "@/utils/schema";
-import { eq } from "drizzle-orm";
+import { getOverallFeedback, getUserAnswers } from "@/app/wawancara/actions";
 import React, { useEffect, useState } from "react";
 import {
   Collapsible,
@@ -28,19 +26,11 @@ function Feedback({ params }) {
   }, []);
 
   const GetFeedback = async () => {
-    const result = await db
-      .select()
-      .from(UserAnswer)
-      .where(eq(UserAnswer.mockIdRef, params.interviewId))
-      .orderBy(UserAnswer.id);
+    const result = await getUserAnswers(params.interviewId);
     setFeedbackList(result);
   };
   const GetOverallFeedback = async () => {
-    const result = await db
-      .select()
-      .from(OverallFeedback)
-      .where(eq(OverallFeedback.mockIdRef, params.interviewId))
-      .orderBy(OverallFeedback.id);
+    const result = await getOverallFeedback(params.interviewId);
 
     setOverallFeedbackList(result);
   };

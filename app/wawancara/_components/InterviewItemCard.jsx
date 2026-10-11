@@ -1,8 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { db } from "@/utils/db";
-import { UserAnswer, MockInterview, OverallFeedback } from "@/utils/schema";
-import { eq } from "drizzle-orm";
+import { deleteInterview, getUserAnswers } from "@/app/wawancara/actions";
 import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -29,7 +27,7 @@ function InterviewItemCard({ interview, onDelete }) {
 
   const GetFeedback = async () => {
     try {
-      const result = await db.select().from(UserAnswer).where(eq(UserAnswer.mockIdRef, interview?.mockId)).orderBy(UserAnswer.id);
+      const result = await getUserAnswers(interview?.mockId);
 
       setFeedbackList(result);
     } catch (error) {
@@ -42,14 +40,8 @@ function InterviewItemCard({ interview, onDelete }) {
 
     setIsDeleting(true);
     try {
-      // Hapus user answers terkait
-      await db.delete(UserAnswer).where(eq(UserAnswer.mockIdRef, interview?.mockId));
-
-      // Hapus overall feedback terkait
-      await db.delete(OverallFeedback).where(eq(OverallFeedback.mockIdRef, interview?.mockId));
-
-      // Hapus mock interview
-      await db.delete(MockInterview).where(eq(MockInterview.mockId, interview?.mockId));
+      // Hapus mock interview beserta user answers & overall feedback terkait
+      await deleteInterview(interview?.mockId);
 
       // Tampilkan toast success
       toast({

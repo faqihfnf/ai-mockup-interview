@@ -1,8 +1,6 @@
 "use client";
 
-import { db } from "@/utils/db";
-import { MockInterview } from "@/utils/schema";
-import { desc, eq } from "drizzle-orm";
+import { getInterviewList } from "@/app/wawancara/actions";
 import React, { useEffect, useState } from "react";
 import InterviewItemCard from "./InterviewItemCard";
 import { useUser } from "@clerk/nextjs";
@@ -22,13 +20,7 @@ function InterviewList() {
   const GetInterviewList = async () => {
     try {
       setIsLoading(true);
-      const result = await db
-        .select()
-        .from(MockInterview)
-        .where(
-          eq(MockInterview.createdby, user?.primaryEmailAddress?.emailAddress)
-        )
-        .orderBy(desc(MockInterview.id));
+      const result = await getInterviewList();
 
       setInterviewList(result);
     } catch (error) {

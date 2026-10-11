@@ -12,13 +12,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { chatSession } from "@/utils/GeminiAiModal";
 import { LoaderCircle, Plus, X } from "lucide-react";
-import { db } from "@/utils/db";
-import { v4 as uuidv4 } from "uuid";
-import { useUser } from "@clerk/nextjs";
-import moment from "moment/moment";
-import { MockInterview } from "@/utils/schema";
+import { createInterview } from "@/app/wawancara/actions";
 import { useRouter } from "next/navigation";
 import {
   Select,
@@ -39,67 +34,36 @@ function AddNewInterview() {
   const [totalQuestions, setTotalQuestions] = useState();
   const [language, setLanguage] = useState();
   const [loading, setLoading] = useState(false);
-  const [jsonMockResp, setJsonMockResp] = useState([]);
   const router = useRouter();
-  const { user } = useUser();
   const { toast } = useToast();
   const onSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-    const inputPromt =
-      "Job Position : " +
-      jobPosition +
-      ", Job Description: " +
-      jobDesc +
-      ", Years of Experience: " +
-      jobExperience +
-      ", total question: " +
-      totalQuestions +
-      ",  interview language: " +
-      language +
-      ". Based on this information, please generate interview questions with concise answers according to the selected total questions and interview language. Ensure question difficulty is appropriate to the job position, job description, and years of experience. The higher the experience level and the seniority of the position, the more complex and in-depth the questions should be. IMPORTANT!!! Please give question and answered consistently as field in JSON.";
 
-    const result = await chatSession.sendMessage(inputPromt);
-    const MockJsonResp = result.response
-      .text()
-      .replace(/```json/g, "")
-      .replace(/```/g, "")
-      .replace(/[\b\f\n\r\t\v]/g, "")
-      .trim();
-    setJsonMockResp(MockJsonResp);
+    let resp;
+    try {
+      // Generate pertanyaan & simpan ke database dilakukan di server
+      resp = await createInterview({ jobPosition, jobDesc, jobExperience, totalQuestions, language });
+    } catch (error) {
+      resp = { error: "Silahkan coba lagi! " };
+    }
 
-    if (MockJsonResp) {
-      const resp = await db
-        .insert(MockInterview)
-        .values({
-          mockId: uuidv4(),
-          jsonMockResp: MockJsonResp,
-          jobPosition: jobPosition,
-          jobDesc: jobDesc,
-          jobExperience: jobExperience,
-          language: language,
-          createdby: user?.primaryEmailAddress?.emailAddress,
-          createdAt: moment().format("YYYY-MM-DD"),
-        })
-        .returning({ mockId: MockInterview.mockId });
-
-      if (resp) {
-        toast({
-          variant: "success",
-          title: "Generate Mock Interview Berhasil",
-          description: "Silahkan untuk memulai interview anda! ",
-        });
-        // Menunggu sebelum menjalankan setOpenDialog dan reload
-        setTimeout(() => {
-          setOpenDialog(false);
-          window.location.reload();
-        }, 1500);
-      }
+    if (resp?.mockId) {
+      toast({
+        variant: "success",
+        title: "Generate Mock Interview Berhasil",
+        description: "Silahkan untuk memulai interview anda! ",
+      });
+      // Menunggu sebelum menjalankan setOpenDialog dan reload
+      setTimeout(() => {
+        setOpenDialog(false);
+        window.location.reload();
+      }, 1500);
     } else {
       toast({
         variant: "destructive",
         title: "Generate Mock Interview Gagal",
-        description: "Silahkan coba lagi! ",
+        description: resp?.error || "Silahkan coba lagi! ",
       });
     }
     setLoading(false);

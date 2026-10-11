@@ -1,12 +1,8 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { db } from "@/utils/db";
-import { chatSession } from "@/utils/GeminiAiModal";
-import { MockInterview, OverallFeedback, UserAnswer } from "@/utils/schema";
-import { eq } from "drizzle-orm";
+import { submitAnswer } from "@/app/wawancara/actions";
 import { Mic, StopCircle, LoaderCircle } from "lucide-react";
-import moment from "moment";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -24,7 +20,6 @@ function AnswerSection({
   const router = useRouter();
   const { toast } = useToast();
   const [userAnswer, setUserAnswer] = useState("");
-  const [interviewDataUser, setInterviewDataUser] = useState();
   const [loading, setLoading] = useState(false);
   const {
     error,
@@ -59,10 +54,6 @@ function AnswerSection({
     }
   }, [userAnswer]);
 
-  useEffect(() => {
-    GetInterviewDetails();
-  }, []);
-
   const validateAndProcessAnswer = () => {
     const wordCount = userAnswer.trim().split(/\s+/).length;
 
@@ -87,25 +78,6 @@ function AnswerSection({
     UpdateUserAnswer();
   };
 
-  const GetInterviewDetails = async () => {
-    try {
-      const result = await db
-        .select()
-        .from(MockInterview)
-        .where(eq(MockInterview.mockId, params.interviewId));
-      setInterviewDataUser(result[0]);
-    } catch (err) {
-      toast({
-        variant: "destructive",
-        title: "Gagal Mengambil Data Interview!",
-        description: "Silahkan coba kembali",
-      });
-      // toast.error("Failed to fetch interview details", {
-      //   description: "Please try again !",
-      // });
-    }
-  };
-
   const StartStopRecording = async () => {
     try {
       if (isRecording) {
@@ -128,42 +100,15 @@ function AnswerSection({
   const UpdateUserAnswer = async () => {
     setLoading(true);
     try {
-      const feedbackPromt =
-        "Question:" +
-        mockInterviewQuestions[activeQuestionIndex]?.question +
-        "Correct Answer:" +
-        mockInterviewQuestions[activeQuestionIndex]?.answer +
-        "User Answer:" +
-        userAnswer +
-        "Compare the User Answer with the Question and Correct Answer. Provide friendly, motivational feedback using" +
-        interviewDataUser?.language +
-        "language and give a rating from 1 to 5 based on how well the User Answer matches the Correct Answer. And it's okay to give a decimal number for the rating. If the User Answer is not fully accurate, offer encouragement for improvement in a supportive way." +
-        "in just 3 to 5 lines to improve it in JSON format with rating field and feedback field";
-
-      const result = await chatSession.sendMessage(feedbackPromt);
-      const mockJsonResp = result.response
-        .text()
-        .replace(/```json/g, "")
-        .replace(/```/g, "")
-        .trim();
-
-      let JsonFeedbackResp;
-      try {
-        JsonFeedbackResp = JSON.parse(mockJsonResp);
-      } catch (error) {
-        throw new Error("Invalid feedback format received");
-      }
-
-      const response = await db.insert(UserAnswer).values({
-        mockIdRef: interviewData?.mockId,
-        question: mockInterviewQuestions[activeQuestionIndex]?.question,
-        correctAnswer: mockInterviewQuestions[activeQuestionIndex]?.answer,
+      // Penilaian jawaban oleh AI & simpan ke database dilakukan di server
+      const response = await submitAnswer({
+        mockId: interviewData?.mockId,
+        questionIndex: activeQuestionIndex,
         userAnswer: userAnswer,
-        feedback: JsonFeedbackResp?.feedback,
-        rating: JsonFeedbackResp?.rating,
-        userEmail: interviewData?.createdby,
-        createdAt: moment().format("YYYY-MM-DD"),
       });
+      if (response?.error) {
+        throw new Error(response.error);
+      }
 
       if (response) {
         // toast.success("Answer saved successfully", {
