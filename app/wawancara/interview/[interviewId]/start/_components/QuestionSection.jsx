@@ -48,7 +48,7 @@ function QuestionSection({ mockInterviewQuestions, activeQuestionIndex }) {
             <strong>Note : </strong>
           </h3>
           <h2 className="text-sm text-primary my-3">
-            Click "Record Answer" saat anda ingin mulai menjawab pertanyaan. At
+            Click &quot;Record Answer&quot; saat anda ingin mulai menjawab pertanyaan. At
             the end of the interview, we will give you feedback with the correct
             answer for each question and your answer to compare it and give you
             a score for your answer. Make sure your answer the question with a

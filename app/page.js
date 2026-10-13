@@ -3,6 +3,7 @@ import Hero from "./_components/Hero";
 import PlusPoint from "./_components/PlusPoint";
 import Footer from "./_components/Footer";
 import Faq from "./_components/Faq";
+import About from "./_components/About";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <PlusPoint />
+      <About />
       <Faq />
       <Footer />
     </div>

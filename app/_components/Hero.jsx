@@ -2,6 +2,7 @@
 import { SquareArrowOutUpRight } from "lucide-react";
 import React from "react";
 import { useTypewriter } from "react-simple-typewriter";
+import { siteConfig } from "@/lib/site-config";
 
 function Hero() {
   const [typeEffect] = useTypewriter({
@@ -31,7 +32,7 @@ function Hero() {
             <span className="text-purple-700 animate-blink">|</span>
           </h2>
           <p className="max-w-5xl mx-auto mt-2 font-medium text-slate-600 sm:text-lg/relaxed ">
-            Platform wawancara interaktif dengan AI yang akan membantu kamu mempersiapkan diri menghadapi wawancara kerja. <br /> Dengan fitur yang lengkap seperti open kamera dan microphone membuat pengalaman interviewmu semakin nyata.
+            Platform wawancara interaktif dengan AI yang akan membantu kamu mempersiapkan diri menghadapi wawancara kerja. <br /> Dengan fitur yang lengkap seperti kamera dan mikrofon, pengalaman interviewmu akan semakin nyata.
           </p>
           <div className="flex flex-wrap justify-center gap-4 mt-8">
             <a
@@ -43,11 +44,11 @@ function Hero() {
             </a>
             <a
               className="flex items-center justify-center w-full px-12 py-3 text-lg font-semibold text-purple-600 border border-purple-600 rounded-md bg-purple-50 hover:bg-gradient-to-bl hover:from-purple-100 hover:via-violet-100 hover:to-indigo-100 focus:outline-none focus:ring active:bg-purple-200 sm:w-auto"
-              href="https://wa.me/628996423135" // Menggunakan wa.me untuk tautan langsung
+              href={siteConfig.whatsapp} // Menggunakan wa.me untuk tautan langsung
               target="_blank" // Membuka di tab baru
               rel="noopener noreferrer" // Untuk keamanan
             >
-              Contact Me
+              Hubungi Kami
             </a>
           </div>
         </div>

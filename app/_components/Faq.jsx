@@ -36,7 +36,7 @@ function Faq() {
           </AccordionTrigger>
           <AccordionContent className="text-sm md:text-lg text-indigo-800 font-semibold">
             Platform ini menggunakan AI untuk menghasilkan pertanyaan wawancara,
-            mengevaluasi jawaban anda, dan memberikan umpan balik serta rating
+            mengevaluasi jawaban Anda, dan memberikan umpan balik serta rating
             untuk membantu Anda mempersiapkan diri sebelum menghadapi wawancara
             kerja sesungguhnya.
           </AccordionContent>
@@ -73,8 +73,8 @@ function Faq() {
           </AccordionTrigger>
           <AccordionContent className="text-sm md:text-lg text-indigo-800 font-semibold">
             Ya! Semua hasil dan umpan balik akan disimpan dan dapat diakses
-            kapan saja dengan mudah agar anda bisa melihat kembali hasil
-            interview anda.
+            kapan saja dengan mudah agar Anda bisa melihat kembali hasil
+            interview Anda.
           </AccordionContent>
         </AccordionItem>
         <AccordionItem
@@ -84,10 +84,10 @@ function Faq() {
             Apakah video wawancara akan disimpan?
           </AccordionTrigger>
           <AccordionContent className="text-sm md:text-lg text-indigo-800 font-semibold">
-            Tidak perlu khawatir! Platform tidak merekam video anda sama sekali.
-            Fitur opencam hanya digunakan untuk simulasi agar wawancara menjadi
+            Tidak perlu khawatir! Platform tidak merekam video Anda sama sekali.
+            Fitur kamera hanya digunakan untuk simulasi agar wawancara menjadi
             lebih nyata. Anda bisa berlatih menjawab pertanyaan wawancara dengan
-            menggunakan fitur opencam
+            menggunakan fitur kamera.
           </AccordionContent>
         </AccordionItem>
       </Accordion>

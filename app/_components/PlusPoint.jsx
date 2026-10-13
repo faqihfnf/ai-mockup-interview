@@ -40,7 +40,7 @@ function PlusPoint() {
               <h2 className="mt-2 text-2xl font-bold text-slate-900">AI Generating Question</h2>
             </div>
             <p className="mt-1 w-full text-sm text-slate-700">
-              Pertanyaan untuk wawancara akan dihasilkan secara otomatis oleh AI sesuai dengan keahlian dan pengalaman kerja yang di input user. Pertanyaan yang relefan akan membantu user untuk lebih baik dalam menjawabnya.
+              Pertanyaan untuk wawancara akan dihasilkan secara otomatis oleh AI sesuai dengan posisi yang dilamar, keahlian, dan pengalaman kerja yang diinput user. Pertanyaan yang relevan akan membantu user untuk lebih baik dalam menjawabnya.
             </p>
           </div>
           <div
@@ -112,7 +112,7 @@ function PlusPoint() {
               <h2 className="mt-2 text-2xl font-bold text-slate-900">Use Microphone</h2>
             </div>
             <p className="mt-1 w-full text-sm text-slate-700">
-              User menjawab pertanyaan dengan menggunakan mikrofon pada device-nya. Kemudian jawaban tersebut dirubah menjadi text untuk diproses oleh AI guna mendapatkan feedback dan rating.
+              User menjawab pertanyaan dengan menggunakan mikrofon pada device-nya. Kemudian jawaban tersebut diubah menjadi teks untuk diproses oleh AI guna mendapatkan feedback dan rating.
             </p>
           </div>
         </div>

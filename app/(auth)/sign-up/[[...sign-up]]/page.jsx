@@ -8,7 +8,7 @@ export default function Page() {
           <img alt="" src="images/signin.jpg" class="absolute inset-0 h-full w-full object-cover opacity-80" />
 
           <div class="hidden lg:relative lg:block lg:p-12">
-            <h2 class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">Welcome to AI Mockup Interview</h2>
+            <h2 class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">Welcome to AI Mock Interview</h2>
 
             <p class="mt-4 leading-relaxed text-white/90">
               Using advanced AI technology, it simulates real-world interview scenarios, providing personalized feedback on responses, communication skills, and body language. This tool helps improve confidence and readiness for your next

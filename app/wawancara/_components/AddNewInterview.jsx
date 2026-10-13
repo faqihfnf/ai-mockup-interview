@@ -184,8 +184,8 @@ function AddNewInterview() {
                     {loading ? (
                       <>
                         {" "}
-                        <LoaderCircle className="w-4 h-4 animate-spin" /> "Ai
-                        Generating"
+                        <LoaderCircle className="w-4 h-4 animate-spin" /> &quot;Ai
+                        Generating&quot;
                       </>
                     ) : (
                       "Start Interview"
